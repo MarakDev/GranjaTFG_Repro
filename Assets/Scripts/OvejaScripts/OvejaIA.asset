@@ -17,11 +17,9 @@ MonoBehaviour:
     version=\"1.0\">\r\n  <BehaviorTree id=\"0\" />\r\n  <runtimeInfo>\r\n    <BehaviorTree
     id=\"0\" guid=\"34aecbeeb47c4d74483e24043f1c4ff8\" nextId=\"13\">\r\n      <root>\r\n       
     <RepeatDecorator id=\"8\" />\r\n      </root>\r\n      <inputParams>\r\n       
-    <inputValues>\r\n          <entry name=\"area\" type=\"UnityEngine.GameObject\"
-    isBlackboard=\"False\" />\r\n          <entry name=\"randomPosition\" type=\"UnityEngine.Vector2\"
-    isBlackboard=\"False\" />\r\n          <entry name=\"wanderSpeed\" type=\"System.Single\"
+    <inputValues>\r\n          <entry name=\"wanderSpeed\" type=\"System.Single\"
     isBlackboard=\"False\" value=\"0\" />\r\n          <entry name=\"TimeWandering\"
-    type=\"UnityEngine.Vector2\" isBlackboard=\"False\" value=\"2 10\" />\r\n       
+    type=\"UnityEngine.Vector2\" isBlackboard=\"False\" value=\"2 5\" />\r\n       
     </inputValues>\r\n      </inputParams>\r\n      <outputParams>\r\n        <outputValues>\r\n         
     <entry name=\"waitSeconds\" type=\"System.Single\" isBlackboard=\"True\" />\r\n       
     </outputValues>\r\n      </outputParams>\r\n      <localParams />\r\n    </BehaviorTree>\r\n   
@@ -29,24 +27,17 @@ MonoBehaviour:
     <child>\r\n        <SequenceNode id=\"7\" />\r\n      </child>\r\n      <inputParams
     />\r\n      <outputParams />\r\n      <localParams />\r\n    </RepeatDecorator>\r\n   
     <SequenceNode id=\"7\">\r\n      <children>\r\n        <elem>\r\n          <ActionNode
-    id=\"11\" />\r\n        </elem>\r\n        <elem>\r\n          <ActionNode id=\"12\"
-    />\r\n        </elem>\r\n        <elem>\r\n          <ActionNode id=\"10\" />\r\n       
-    </elem>\r\n      </children>\r\n      <inputParams />\r\n      <outputParams
-    />\r\n      <localParams />\r\n    </SequenceNode>\r\n    <ActionNode id=\"11\"
-    action=\"Basic/WaitForSecondsRandomRange\">\r\n      <inputParams>\r\n       
+    id=\"11\" />\r\n        </elem>\r\n        <elem>\r\n          <ActionNode id=\"10\"
+    />\r\n        </elem>\r\n      </children>\r\n      <inputParams />\r\n     
+    <outputParams />\r\n      <localParams />\r\n    </SequenceNode>\r\n    <ActionNode
+    id=\"11\" action=\"Basic/WaitForSecondsRandomRange\">\r\n      <inputParams>\r\n       
     <inputValues>\r\n          <entry name=\"seconds\" type=\"UnityEngine.Vector2\"
     isBlackboard=\"True\" blackboard=\"TimeWandering\" />\r\n          <entry name=\"waitSeconds\"
     type=\"System.Single\" isBlackboard=\"True\" blackboard=\"waitSeconds\" />\r\n       
     </inputValues>\r\n      </inputParams>\r\n      <outputParams>\r\n        <outputValues>\r\n         
     <entry name=\"waitSeconds\" type=\"System.Single\" isBlackboard=\"True\" blackboard=\"waitSeconds\"
     />\r\n        </outputValues>\r\n      </outputParams>\r\n      <localParams
-    />\r\n    </ActionNode>\r\n    <ActionNode id=\"12\" action=\"Vector2/GetRandomInArea2D\">\r\n     
-    <inputParams>\r\n        <inputValues>\r\n          <entry name=\"area\" type=\"UnityEngine.GameObject\"
-    isBlackboard=\"True\" blackboard=\"area\" />\r\n        </inputValues>\r\n     
-    </inputParams>\r\n      <outputParams>\r\n        <outputValues>\r\n         
-    <entry name=\"randomPosition\" type=\"UnityEngine.Vector2\" isBlackboard=\"True\"
-    blackboard=\"randomPosition\" />\r\n        </outputValues>\r\n      </outputParams>\r\n     
-    <localParams />\r\n    </ActionNode>\r\n    <ActionNode id=\"10\" action=\"Navigation/MoveToPosition2D\">\r\n     
+    />\r\n    </ActionNode>\r\n    <ActionNode id=\"10\" action=\"Navigation/MoveToPosition2D\">\r\n     
     <inputParams>\r\n        <inputValues>\r\n          <entry name=\"target\" type=\"UnityEngine.Vector2\"
     isBlackboard=\"True\" blackboard=\"randomPosition\" />\r\n          <entry name=\"wanderSpeed\"
     type=\"System.Single\" isBlackboard=\"True\" blackboard=\"wanderSpeed\" />\r\n         
@@ -57,37 +48,31 @@ MonoBehaviour:
     <_rootList>\r\n        <elem>\r\n          <SequenceNode id=\"7\" />\r\n       
     </elem>\r\n        <elem>\r\n          <RepeatDecorator id=\"8\" />\r\n       
     </elem>\r\n        <elem>\r\n          <ActionNode id=\"10\" />\r\n        </elem>\r\n       
-    <elem>\r\n          <ActionNode id=\"11\" />\r\n        </elem>\r\n        <elem>\r\n         
-    <ActionNode id=\"12\" />\r\n        </elem>\r\n      </_rootList>\r\n      <_nodes>\r\n       
-    <nodes>\r\n          <ActionNode id=\"12\" />\r\n          <ActionNode id=\"11\"
-    />\r\n          <SequenceNode id=\"7\" />\r\n          <RepeatDecorator id=\"8\"
-    />\r\n          <ActionNode id=\"10\" />\r\n        </nodes>\r\n      </_nodes>\r\n   
-    </BehaviorTree>\r\n    <RepeatDecorator id=\"8\">\r\n      <_data>\r\n       
-    <data breakpoint=\"0\" selected=\"False\" position=\"470.0203 100.6463\" name=\"Repeat\"
-    description=\"Repeats the execution of its child node\" cardinality=\"1\" hasParent=\"False\">\r\n         
+    <elem>\r\n          <ActionNode id=\"11\" />\r\n        </elem>\r\n      </_rootList>\r\n     
+    <_nodes>\r\n        <nodes>\r\n          <ActionNode id=\"11\" />\r\n         
+    <SequenceNode id=\"7\" />\r\n          <RepeatDecorator id=\"8\" />\r\n         
+    <ActionNode id=\"10\" />\r\n        </nodes>\r\n      </_nodes>\r\n    </BehaviorTree>\r\n   
+    <RepeatDecorator id=\"8\">\r\n      <_data>\r\n        <data breakpoint=\"0\"
+    selected=\"False\" position=\"405.1044 102.8683\" name=\"Repeat\" description=\"Repeats
+    the execution of its child node\" cardinality=\"1\" hasParent=\"False\">\r\n         
     <BehaviorTree id=\"0\" />\r\n          <RepeatDecorator id=\"8\" />\r\n       
     </data>\r\n      </_data>\r\n    </RepeatDecorator>\r\n    <SequenceNode id=\"7\">\r\n     
-    <_data>\r\n        <data breakpoint=\"0\" selected=\"False\" position=\"457.7979
-    333.9803\" name=\"Sequence\" description=\"Executes all its children in sequence
+    <_data>\r\n        <data breakpoint=\"0\" selected=\"False\" position=\"392.8818
+    336.2024\" name=\"Sequence\" description=\"Executes all its children in sequence
     until all of them are successful\" cardinality=\"-1\" hasParent=\"True\">\r\n         
     <BehaviorTree id=\"0\" />\r\n          <SequenceNode id=\"7\" />\r\n         
     <RepeatDecorator id=\"8\" />\r\n        </data>\r\n      </_data>\r\n    </SequenceNode>\r\n   
     <ActionNode id=\"11\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
-    position=\"46.22119 534.8612\" name=\"Basic/WaitForSecondsRandomRange\" description=\"Action
+    position=\"145.0546 543.0572\" name=\"Basic/WaitForSecondsRandomRange\" description=\"Action
     that success after a period of time.\" cardinality=\"0\" hasParent=\"True\">\r\n         
     <BehaviorTree id=\"0\" />\r\n          <ActionNode id=\"11\" />\r\n         
     <SequenceNode id=\"7\" />\r\n        </data>\r\n      </_data>\r\n    </ActionNode>\r\n   
-    <ActionNode id=\"12\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
-    position=\"414.5275 538.4723\" name=\"Vector2/GetRandomInArea2D\" description=\"Gets
-    a random position from a given area\" cardinality=\"0\" hasParent=\"True\">\r\n         
-    <BehaviorTree id=\"0\" />\r\n          <ActionNode id=\"12\" />\r\n         
-    <SequenceNode id=\"7\" />\r\n        </data>\r\n      </_data>\r\n    </ActionNode>\r\n   
-    <ActionNode id=\"10\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
-    position=\"701.4647 538.6197\" name=\"Navigation/MoveToPosition2D\" description=\"Moves
+    <ActionNode id=\"10\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"True\"
+    position=\"506.1339 544.3157\" name=\"Navigation/MoveToPosition2D\" description=\"Moves
     the game object to a given position by using a NavMeshAgent\" cardinality=\"0\"
     hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n          <ActionNode
     id=\"10\" />\r\n          <SequenceNode id=\"7\" />\r\n        </data>\r\n     
     </_data>\r\n    </ActionNode>\r\n  </editorInfo>\r\n</BehaviorBricks>"
-  zoom: 0.8
+  zoom: 0.9
   subslist: []
   _guid: 34aecbeeb47c4d74483e24043f1c4ff8

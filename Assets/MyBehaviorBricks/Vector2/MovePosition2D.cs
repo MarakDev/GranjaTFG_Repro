@@ -11,11 +11,6 @@ namespace BBUnity.Actions
     [Help("Moves the game object to a given position by using a NavMeshAgent")]
     public class MovePosition2D : GOAction
     {
-        ///<value>Input target position where the game object will be moved Parameter.</value>
-        [InParam("target")]
-        [Help("Target position where the game object will be moved")]
-        public Vector2 target;
-
         [InParam("wanderSpeed")]
         [Help("Target position where the game object will be moved")]
         public float wanderSpeed;
@@ -24,19 +19,22 @@ namespace BBUnity.Actions
         [Help("Target position where the game object will be moved")]
         public float timeWander;
 
-        public Rigidbody2D rb_sheep;
-
+        private Vector2 target;
+        public Rigidbody2D rb_sheep { get; set; }
         public override void OnStart()
         {
             rb_sheep = gameObject.GetComponent<Rigidbody2D>();
             Debug.Log("tiemwander start: " + timeWander);
+
+            //random direction
+            target = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         }
 
         public override TaskStatus OnUpdate()
         {
             rb_sheep.velocity = new Vector2(target.x * wanderSpeed, target.y * wanderSpeed);
 
-            if (rb_sheep.position == target || timeWander < 0)
+            if (rb_sheep.position == target || timeWander <= 0)
             {
                 rb_sheep.velocity = Vector2.zero;
                 return TaskStatus.COMPLETED;
