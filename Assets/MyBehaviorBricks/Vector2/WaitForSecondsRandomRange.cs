@@ -18,10 +18,7 @@ namespace BBCore.Actions
         [Help("Amount of time to wait (in seconds)")]
         public Vector2 secondsRange;
 
-        [OutParam("waitSeconds")]
-        [Help("Amount of time to wait (in seconds)lllll")] 
-        public float waitSeconds;
-
+        private float secondsWaited;
         private float elapsedTime;
 
         /// <summary>Initialization Method of WaitForSeconds.</summary>
@@ -29,9 +26,8 @@ namespace BBCore.Actions
         public override void OnStart()
         {
             elapsedTime = 0;
-            waitSeconds = Random.Range(secondsRange.x, secondsRange.y);
+            secondsWaited = Random.Range(secondsRange.x, secondsRange.y);
 
-            Debug.Log("wait seconds in wait seconds : " + waitSeconds);
         }
 
         /// <summary>Method of Update of WaitForSeconds.</summary>
@@ -39,7 +35,7 @@ namespace BBCore.Actions
         public override TaskStatus OnUpdate()
         {
             elapsedTime += Time.deltaTime;
-            if (elapsedTime >= waitSeconds)
+            if (elapsedTime >= secondsWaited)
                 return TaskStatus.COMPLETED;
             return TaskStatus.RUNNING;
         }

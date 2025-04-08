@@ -7,41 +7,43 @@ namespace BBUnity.Actions
     /// <summary>
     /// It is an action to move the GameObject to a given position.
     /// </summary>
-    [Action("Navigation/MoveToPosition2D")]
+    [Action("Navigation/MoveToRandomPosition2D")]
     [Help("Moves the game object to a given position by using a NavMeshAgent")]
-    public class MovePosition2D : GOAction
+    public class MoveToRandomPosition2D : GOAction
     {
         [InParam("wanderSpeed")]
         [Help("Target position where the game object will be moved")]
         public float wanderSpeed;
 
-        [InParam("time")]
+        [InParam("wanderSeconds")]
         [Help("Target position where the game object will be moved")]
-        public float timeWander;
+        public Vector2 wanderSeconds;
 
-        private Vector2 target;
-        public Rigidbody2D rb_sheep { get; set; }
+        private Vector2 direction;
+        private Rigidbody2D rb;
+        private float totalSeconds;
+
         public override void OnStart()
         {
-            rb_sheep = gameObject.GetComponent<Rigidbody2D>();
-            Debug.Log("tiemwander start: " + timeWander);
+            rb = gameObject.GetComponent<Rigidbody2D>();
+
+            totalSeconds = Random.Range(wanderSeconds.x, wanderSeconds.y);
 
             //random direction
-            target = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         }
 
         public override TaskStatus OnUpdate()
         {
-            rb_sheep.velocity = new Vector2(target.x * wanderSpeed, target.y * wanderSpeed);
+            rb.velocity = new Vector2(direction.x * wanderSpeed, direction.y * wanderSpeed);
 
-            if (rb_sheep.position == target || timeWander <= 0)
+            if (totalSeconds <= 0)
             {
-                rb_sheep.velocity = Vector2.zero;
+                rb.velocity = Vector2.zero;
                 return TaskStatus.COMPLETED;
             }
 
-            timeWander -= Time.deltaTime;
-            Debug.Log("tiemwander: " + timeWander);
+            totalSeconds -= Time.deltaTime;
 
             return TaskStatus.RUNNING;
         }

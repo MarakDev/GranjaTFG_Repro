@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTasksPerTick: 500
-  behavior: {fileID: 11400000, guid: 34aecbeeb47c4d74483e24043f1c4ff8, type: 2}
+  behavior: {fileID: 11400000, guid: 7122ec0851b3e3e4e8f70a2f075459b5, type: 2}
   paused: 0
   restartWhenFinished: 0
   blackboard:
@@ -196,9 +196,8 @@ MonoBehaviour:
     boolParamsLostDefaultValue: 
     floatParams:
     - 1
-    - 0
     floatParamsNames:
-    - wanderSpeed
+    - _wanderSpeed
     floatParamsLostDefaultValue: 
     stringParams: []
     stringParamsNames: []
@@ -206,8 +205,10 @@ MonoBehaviour:
     colorParams: []
     colorParamsNames: []
     colorParamsLostDefaultValue: 
-    objectParams: []
-    objectParamsNames: []
+    objectParams:
+    - {fileID: 0}
+    objectParamsNames:
+    - target
     objectParamsLostDefaultValue: 
     layerMaskParams: []
     layerMaskParamsNames: []
@@ -215,10 +216,9 @@ MonoBehaviour:
     enumParamsNames: []
     enumParamsLostDefaultValue: 
     vector2Params:
-    - {x: 2, y: 5}
-    - {x: 2, y: 5}
+    - {x: 2, y: 8}
     vector2ParamsNames:
-    - TimeWandering
+    - _secondsRange
     vector2ParamsLostDefaultValue: 
     vector3Params: []
     vector3ParamsNames: []
