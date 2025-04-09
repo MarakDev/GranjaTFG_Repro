@@ -1694,11 +1694,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1005481603510933850, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.32
+      value: -4.43
       objectReference: {fileID: 0}
     - target: {fileID: 1005481603510933850, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 38.78
+      value: 28.21
       objectReference: {fileID: 0}
     - target: {fileID: 1005481603510933850, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1740,13 +1740,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sheep
       objectReference: {fileID: 0}
+    - target: {fileID: 8381292287887865596, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: behavior
       value: 
-      objectReference: {fileID: 11400000, guid: 3d804a7ac067fae47884bc9dccb280fe, type: 2}
+      objectReference: {fileID: 11400000, guid: 599e8263a6b56be4d9ec496c0ffeeddf, type: 2}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.floatParams.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.objectParams.Array.size
@@ -1758,19 +1762,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.floatParams.Array.data[0]
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.floatParams.Array.data[1]
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.floatParams.Array.data[2]
-      value: 1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
+      propertyPath: blackboard.floatParams.Array.data[3]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
+      propertyPath: blackboard.floatParams.Array.data[4]
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.layerMaskParams.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.objectParams.Array.data[0]
@@ -1778,7 +1790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.floatParamsNames.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.objectParamsNames.Array.size
@@ -1790,15 +1802,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.vector2Params.Array.data[0].y
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
-      propertyPath: blackboard.vector2Params.Array.data[1].x
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
+      propertyPath: blackboard.vector2Params.Array.data[1].x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.vector2Params.Array.data[1].y
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.vector2ParamsNames.Array.size
@@ -1806,19 +1818,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.floatParamsNames.Array.data[0]
-      value: dogAreaRange
-      objectReference: {fileID: 0}
-    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
-      propertyPath: blackboard.floatParamsNames.Array.data[1]
-      value: dogSpeed
-      objectReference: {fileID: 0}
-    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
-      propertyPath: blackboard.floatParamsNames.Array.data[2]
       value: wanderSpeed
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
+      propertyPath: blackboard.floatParamsNames.Array.data[1]
+      value: dogAreaRange
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
+      propertyPath: blackboard.floatParamsNames.Array.data[2]
+      value: dogSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
+      propertyPath: blackboard.floatParamsNames.Array.data[3]
+      value: wolfSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
+      propertyPath: blackboard.floatParamsNames.Array.data[4]
+      value: wolfAreaRange
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.layerMaskParamsNames.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.objectParamsNames.Array.data[0]
@@ -1834,11 +1854,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.layerMaskParamsNames.Array.data[0]
-      value: layer
+      value: dogLayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
+      propertyPath: blackboard.layerMaskParamsNames.Array.data[1]
+      value: wolfLayer
       objectReference: {fileID: 0}
     - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
       propertyPath: blackboard.layerMaskParams.Array.data[0].m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662661604095522135, guid: 33cb90b8eb1c1594d80dc47bd2c170b2, type: 3}
+      propertyPath: blackboard.layerMaskParams.Array.data[1].m_Bits
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
