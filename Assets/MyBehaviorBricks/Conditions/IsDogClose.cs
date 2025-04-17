@@ -18,11 +18,18 @@ namespace BBUnity.Conditions
         [Help("Target to check the distance")]
         public LayerMask dogLayer;
 
+        [InParam("wolfLayer")]
+        [Help("Target to check the distance")]
+        public LayerMask wolfLayer;
+
         ///<value>Input maximun distance Parameter to consider that the target is close.</value>
         [InParam("dogAreaRange")]
         [Help("The maximun distance to consider that the target is close")]
         public float sheepAreaRange_DOG;
 
+        [InParam("wolfAreaRange")]
+        [Help("The maximun distance to consider that the target is close")]
+        public float sheepAreaRange_WOLF;
 
         /// <summary>
         /// Checks whether a target is close depending on a given distance,
@@ -31,7 +38,8 @@ namespace BBUnity.Conditions
         /// <returns>True if the magnitude between the gameobject and de target is lower that the given distance.</returns>
         public override bool Check()
         {
-            if (Physics2D.OverlapCircle(gameObject.transform.position, sheepAreaRange_DOG, dogLayer))
+            if (Physics2D.OverlapCircle(gameObject.transform.position, sheepAreaRange_DOG, dogLayer) &&
+                !Physics2D.OverlapCircle(gameObject.transform.position, sheepAreaRange_WOLF, wolfLayer))
                 return true;
             else
                 return false;

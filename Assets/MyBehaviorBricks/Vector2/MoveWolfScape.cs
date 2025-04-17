@@ -29,19 +29,21 @@ namespace BBUnity.Actions
         Collider2D[] hitCollider;
         public Vector2 sheepDirection;
         private Rigidbody2D rb;
+        private float stress;
 
         public override void OnStart()
         {
             rb = gameObject.GetComponent<Rigidbody2D>();
-
+            stress = 0;
         }
 
         public override TaskStatus OnUpdate()
         {
             WolfScape();
+
             rb.velocity = new Vector2(sheepDirection.x * sheep_wolfSpeed, sheepDirection.y * sheep_wolfSpeed);
 
-            if(hitCollider.Length == 0)
+            if(hitCollider.Length == 0 || stress > 100)
             {
                 return TaskStatus.COMPLETED;
             }
@@ -51,7 +53,6 @@ namespace BBUnity.Actions
 
         public void WolfScape()
         {
-
             if (Physics2D.OverlapCircle(gameObject.transform.position, sheepAreaRange_WOLF, wolfLayer))
             {
                 hitCollider = Physics2D.OverlapCircleAll(gameObject.transform.position, sheepAreaRange_WOLF, wolfLayer);
@@ -61,7 +62,7 @@ namespace BBUnity.Actions
                 Vector2 newPos = (Vector2)gameObject.transform.position - wolfPos; //direccion contraria a la posicion del perro
 
                 sheepDirection = newPos.normalized;
-
+                stress++;
             }
 
         }
