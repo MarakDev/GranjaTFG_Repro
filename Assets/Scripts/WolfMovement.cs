@@ -7,7 +7,7 @@ public class WolfMovement : MonoBehaviour
 {
     [SerializeField] private float wolfSpeed = 7.5f;
     [SerializeField] private float wolfAfraidSpeed = 10;
-    [SerializeField] private float maxFear = 5;
+    [SerializeField] private float maxLife = 5;
 
     [SerializeField] private float sheepHarashRange;
     [SerializeField] private float dogAfraidRange;
@@ -15,10 +15,10 @@ public class WolfMovement : MonoBehaviour
     [SerializeField] public float wolfStartCooldown;
     [SerializeField] public float wolfRestartCooldown;
 
-
+    [SerializeField] private GameObject smokeFire;
+    [SerializeField] private GameObject smokeDeath;
     [SerializeField] private LayerMask sheepLayer;
     [SerializeField] private LayerMask dogLayer;
-    [SerializeField] private GameObject smoke;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -28,13 +28,13 @@ public class WolfMovement : MonoBehaviour
     private GameObject activeSheep;
 
     private float speed;
-    private float wolfFear;
+    private float currentLife;
 
     private bool wolfActive = false;
     private bool wolfSTOP = false;
 
-    private bool wolfAfraid = false;
-    private bool wolfScape = false;
+    private bool wolfUnderFire = false;
+    private bool wolfEscape = false;
 
     void Start()
     {
@@ -49,18 +49,16 @@ public class WolfMovement : MonoBehaviour
     {
         if (!wolfSTOP && wolfActive)
         {
-            wolfAfraid = Physics2D.OverlapCircle(transform.position, dogAfraidRange, dogLayer);
+            wolfUnderFire = Physics2D.OverlapCircle(transform.position, dogAfraidRange, dogLayer);
 
             SheepChase();
 
-            DogAfraid();
+            UnderDogFire();
 
-            DogScape();
-
-            if (wolfFear > maxFear * 0.5f)
-                animator.SetBool("onFire", true);
+            WolfScape();
         }
 
+        UpdateAnimations();
     }
 
     private void FixedUpdate()
@@ -69,9 +67,9 @@ public class WolfMovement : MonoBehaviour
 
     }
 
-    private void DogScape()
+    private void WolfScape()
     {
-        if(wolfFear > maxFear && !wolfScape)
+        if(currentLife > maxLife && !wolfEscape)
         {
             float dirX = Random.Range(-1f, 1f);
             float dirY = 1 - dirX;
@@ -83,53 +81,41 @@ public class WolfMovement : MonoBehaviour
 
             speed = wolfAfraidSpeed;
 
-            wolfScape = true;
-            wolfFear = 0;
-
-            animator.Play("Death");
-
-            smoke.SetActive(true);
-
-            this.GetComponent<CircleCollider2D>().enabled = false;
+            wolfEscape = true;
+            currentLife = 0;
         }
 
     }
 
-    private void DogAfraid()
+    private void UnderDogFire()
     {
-        if (wolfAfraid && !wolfScape)
+        if (wolfUnderFire && !wolfEscape)
         {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, dogAfraidRange, dogLayer);
 
             if (hitColliders.Length == 2)
             {
 
-                float velReduction = 1 - (wolfFear * maxFear / 7.5f);
+                float velReduction = 1 - (currentLife * maxLife / 7.5f);
 
                 if (velReduction < 0.1)
                     velReduction = 0.1f;
 
-                wolfFear += Time.deltaTime * 3;
+                currentLife += Time.deltaTime * 3;
                 speed = wolfSpeed * velReduction;
 
             }
             else if (hitColliders.Length == 1)
             {
-                float velReduction = 1 - (wolfFear * maxFear / 15);
+                float velReduction = 1 - (currentLife * maxLife / 15);
 
                 if (velReduction < 0.25)
                     velReduction = 0.25f;
 
-                wolfFear += Time.deltaTime;
+                currentLife += Time.deltaTime;
                 speed = wolfSpeed * velReduction;
 
             }
-
-            if (wolfFear < maxFear * 0.5f)
-                animator.SetBool("shooting", true);
-            else
-                animator.SetBool("shooting_OnFire", true);
-
 
         }
 
@@ -137,9 +123,9 @@ public class WolfMovement : MonoBehaviour
 
     private void SheepChase()
     {
-        if(!wolfAfraid && !wolfScape)
+        if(!wolfUnderFire && !wolfEscape)
         {
-            wolfAfraid = false;
+            wolfUnderFire = false;
             speed = wolfSpeed;
 
             direction = (activeSheep.transform.position - transform.position).normalized;
@@ -148,11 +134,6 @@ public class WolfMovement : MonoBehaviour
             {
                 SheepSelect();
             }
-
-            if (wolfFear < maxFear * 0.5f)
-                animator.SetBool("shooting", false);
-            else
-                animator.SetBool("shooting_OnFire", false);
 
         }
     }
@@ -168,15 +149,46 @@ public class WolfMovement : MonoBehaviour
 
     }
 
-    private void OnDrawGizmos()
+    private void UpdateAnimations()
     {
-        Gizmos.color = Color.green;
 
-        if (wolfAfraid)
-            Gizmos.color = Color.red;
+        if (rb.velocity.x > 0.2f)
+            transform.localScale = new Vector3(3, transform.localScale.y, transform.localScale.z);
+        else
+            transform.localScale = new Vector3(-3, transform.localScale.y, transform.localScale.z);
 
-        Gizmos.DrawWireSphere(transform.position, dogAfraidRange);
+        //sheep chase
+        if (!wolfUnderFire && !wolfEscape)
+        {
+            if (currentLife < maxLife * 0.5f)
+                animator.Play("Idle");
+            else
+            {
+                smokeFire.SetActive(true);
+                animator.Play("Idle_OnFire");
 
+            }
+        }
+        else if(wolfUnderFire && !wolfEscape) //siendo disparado por el perro
+        {
+            if (currentLife < maxLife * 0.5f)
+            {
+
+                animator.Play("Shooting");
+            }
+            else
+            {
+                smokeFire.SetActive(true);
+                animator.Play("Shooting_OnFire");
+
+            }
+        }
+        else if (wolfEscape)
+        {
+            smokeDeath.SetActive(true);
+
+            animator.Play("Death");
+        }
     }
 
     private IEnumerator WolfActive(float cooldown)
@@ -193,15 +205,8 @@ public class WolfMovement : MonoBehaviour
         wolfSTOP = false;
         wolfActive = true;
 
-        smoke.SetActive(false);
-
-        this.GetComponent<CircleCollider2D>().enabled = true;
-
-        animator.SetBool("shooting", false);
-        animator.SetBool("shooting_OnFire", false);
-        animator.SetBool("onFire", false);
-        animator.Play("Idle");
-
+        smokeDeath.SetActive(false);
+        smokeFire.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -210,11 +215,21 @@ public class WolfMovement : MonoBehaviour
         {
             wolfSTOP = true;
             wolfActive = false;
-            wolfScape = false;
+            wolfEscape = false;
             speed = 0;
 
             StartCoroutine(WolfActive(wolfRestartCooldown));
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        if (wolfUnderFire)
+            Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere(transform.position, dogAfraidRange);
+
     }
 
 }
