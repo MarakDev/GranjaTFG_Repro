@@ -17,8 +17,6 @@ public class PlayerMovement : MonoBehaviour
     private Animator animatorD1;
     private Animator animatorD2;
 
-    
-
     //var privates
     private GameObject dog1;
     private GameObject dog2;

@@ -3,7 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class WolfMovement : MonoBehaviour
+public class WolfMovementDESCONTINUADO : MonoBehaviour
 {
     [SerializeField] private float wolfSpeed = 7.5f;
     [SerializeField] private float wolfAfraidSpeed = 10;

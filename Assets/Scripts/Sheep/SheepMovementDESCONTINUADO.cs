@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SheepMovement : MonoBehaviour
+public class SheepMovementDESCONTINUADO : MonoBehaviour
 {
     [SerializeField] private float wanderSpeed = 1;
     [SerializeField] private float pastorSpeed = 3;

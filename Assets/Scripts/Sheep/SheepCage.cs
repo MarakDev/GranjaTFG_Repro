@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Sheep_Cage : MonoBehaviour
+public class SheepCage : MonoBehaviour
 {
 
 
@@ -13,7 +13,7 @@ public class Sheep_Cage : MonoBehaviour
         {
             collision.gameObject.transform.SetParent(transform, true);
             collision.gameObject.layer = LayerMask.NameToLayer("SheepIsCaged");
-            collision.gameObject.GetComponent<SheepMovement>().GetCaged();
+            //collision.gameObject.GetComponent<SheepMovement>().GetCaged();
         }
     }
 
