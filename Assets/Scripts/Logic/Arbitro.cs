@@ -100,23 +100,23 @@ public class Arbitro : MonoBehaviour
                 randomPos = new Vector2(-52, Random.Range(-26, 65));
             }
 
-            WolfMovement spawnedWolf = Instantiate(wolf, randomPos, Quaternion.identity).GetComponent<WolfMovement>();
+            //WolfMovement spawnedWolf = Instantiate(wolf, randomPos, Quaternion.identity).GetComponent<WolfMovement>();
 
-            if (GameManager.instance.easy)
-            {
-                spawnedWolf.wolfStartCooldown = 24f;
-                spawnedWolf.wolfRestartCooldown = 24;
-            }
-            else if (GameManager.instance.mid)
-            {
-                spawnedWolf.wolfStartCooldown = 22f;
-                spawnedWolf.wolfRestartCooldown = 22;
-            }
-            else if (GameManager.instance.hard)
-            {
-                spawnedWolf.wolfStartCooldown = 20f;
-                spawnedWolf.wolfRestartCooldown = 20;
-            }
+            //if (GameManager.instance.easy)
+            //{
+            //    spawnedWolf.wolfStartCooldown = 24f;
+            //    spawnedWolf.wolfRestartCooldown = 24;
+            //}
+            //else if (GameManager.instance.mid)
+            //{
+            //    spawnedWolf.wolfStartCooldown = 22f;
+            //    spawnedWolf.wolfRestartCooldown = 22;
+            //}
+            //else if (GameManager.instance.hard)
+            //{
+            //    spawnedWolf.wolfStartCooldown = 20f;
+            //    spawnedWolf.wolfRestartCooldown = 20;
+            //}
         }
     }
 

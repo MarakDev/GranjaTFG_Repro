@@ -8,7 +8,7 @@ public class State
 {
 
     protected StateMachine stateMachine;
-    protected WolfController wolfController;
+    protected WolfController wC;
 
     public State(StateMachine StateMachine)
     {

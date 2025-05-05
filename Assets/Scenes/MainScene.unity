@@ -123,6 +123,39 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &67513249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 97785070883911654, guid: ff6f7df450f7c0d4cab47eba28f09d6a, type: 3}
+  m_PrefabInstance: {fileID: 1672903431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &67513255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67513249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7db78d84d2e1b4fa16b123f42e5b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wolfSpeed: 7.5
+  maxLife: 5
+  sheepAttackRange: 5
+  dogAttackingRange: 5
+  restartChaseCooldown: 4
+  sheepLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  dogLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  currentSpeed: 0
+  currentLife: 0
+  barrierWolf: 0
 --- !u!4 &264369303 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4949983192218216601, guid: 49ba6006416dd6c4eb0430d901792f0a, type: 3}
@@ -271,7 +304,7 @@ Transform:
   m_GameObject: {fileID: 459571646}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.25, y: 18.292685, z: 0}
+  m_LocalPosition: {x: 42.8, y: 18.292685, z: 0}
   m_LocalScale: {x: 0.65000004, y: 90, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1512,7 +1545,7 @@ Transform:
   m_GameObject: {fileID: 943672785}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.3448799, z: 0}
+  m_LocalPosition: {x: 0, y: -18.4, z: 0}
   m_LocalScale: {x: 0.65000004, y: 90, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1771,8 +1804,8 @@ Transform:
   m_GameObject: {fileID: 1101578613}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 24, z: 0}
-  m_LocalScale: {x: 68, y: 44, z: 47.6}
+  m_LocalPosition: {x: 0.3, y: 13.9884, z: 0}
+  m_LocalScale: {x: 84.365005, y: 64.0244, z: 47.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2300,7 +2333,7 @@ Transform:
   m_GameObject: {fileID: 1399371608}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.25, y: 18.292685, z: 0}
+  m_LocalPosition: {x: -42.3, y: 18.292685, z: 0}
   m_LocalScale: {x: 0.65000004, y: 90, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3137,13 +3170,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1535368805152383275, guid: ff6f7df450f7c0d4cab47eba28f09d6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2121804905017168777, guid: ff6f7df450f7c0d4cab47eba28f09d6a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.15
+      value: -39.34
       objectReference: {fileID: 0}
     - target: {fileID: 2121804905017168777, guid: ff6f7df450f7c0d4cab47eba28f09d6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 50.06
+      value: 51.35
       objectReference: {fileID: 0}
     - target: {fileID: 2121804905017168777, guid: ff6f7df450f7c0d4cab47eba28f09d6a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3184,7 +3221,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 97785070883911654, guid: ff6f7df450f7c0d4cab47eba28f09d6a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 67513255}
   m_SourcePrefab: {fileID: 100100000, guid: ff6f7df450f7c0d4cab47eba28f09d6a, type: 3}
 --- !u!1 &1711431483
 GameObject:
