@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7242843909735590744}
   - component: {fileID: 8018841410776503612}
   - component: {fileID: 9042840393363899761}
-  - component: {fileID: 1535368805152383275}
+  - component: {fileID: 3882911754118464327}
   m_Layer: 9
   m_Name: Wolf
   m_TagString: Untagged
@@ -152,7 +152,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!114 &1535368805152383275
+--- !u!114 &3882911754118464327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,24 +161,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 97785070883911654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13d187ec8ffde9247be5c80584608e1e, type: 3}
+  m_Script: {fileID: 11500000, guid: de7db78d84d2e1b4fa16b123f42e5b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wolfSpeed: 8.5
-  wolfAfraidSpeed: 15
-  maxLife: 5
-  sheepHarashRange: 1.5
-  dogAfraidRange: 5
-  wolfStartCooldown: 15
-  wolfRestartCooldown: 10
-  smokeFire: {fileID: 6616286263379511598}
-  smokeDeath: {fileID: 5455453333441296639}
+  wolfSpeed: 7.5
+  maxLife: 3
+  dogActionRange: 5
+  restartIdleCooldown: 1
+  restartCooldown: 6
   sheepLayer:
     serializedVersion: 2
     m_Bits: 2048
   dogLayer:
     serializedVersion: 2
     m_Bits: 256
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  currentSpeed: 0
+  currentLife: 0
+  barrierWolf: 0
 --- !u!1 &942337341840407578
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +209,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2121804905017168777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

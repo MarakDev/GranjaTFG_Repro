@@ -1,7 +1,5 @@
 
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.TextCore.Text;
 
 public class Wolf_AfraidState : State
 {
@@ -22,7 +20,7 @@ public class Wolf_AfraidState : State
             dirY = 1 + dirX;
 
         direction = new Vector2(dirX, dirY);
-
+        wC.currentSpeed = wC.wolfSpeed * 2;
     }
     public override void FrameUpdate()
     {
@@ -35,7 +33,7 @@ public class Wolf_AfraidState : State
 
     public override void PhysicsUpdate()
     {
-        wC.rb.velocity = new Vector2(direction.x * wC.wolfSpeed + 3, direction.y * wC.wolfSpeed + 3);
+        wC.rb.velocity = new Vector2(direction.x * wC.currentSpeed, direction.y * wC.currentSpeed);
 
     }
 

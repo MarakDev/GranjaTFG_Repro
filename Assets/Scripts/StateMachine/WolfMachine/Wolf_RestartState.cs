@@ -18,7 +18,7 @@ public class Wolf_RestartState : State
         wC.barrierWolf = false;
         wC.currentLife = wC.maxLife;
 
-        float maxCooldown = wC.restartChaseCooldown;
+        float maxCooldown = wC.restartCooldown;
 
         maxDuration = (int)Random.Range(maxCooldown - 3, maxCooldown + 3);
 

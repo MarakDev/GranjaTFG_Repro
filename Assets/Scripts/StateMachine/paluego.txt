@@ -1,7 +1,0 @@
-    public CharacterStateMachine StateMachine { get; set; }
-
-    //Subestado del personaje
-    public CharacterSubstate _substate { get; set; }
-
-    //Movimiento
-    public CharacterIdleState IdleState { get; set; }

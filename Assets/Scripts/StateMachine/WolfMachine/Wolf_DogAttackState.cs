@@ -1,51 +1,31 @@
 using UnityEngine;
 
-public class Wolf_IdleState : State
-{
-    float timer = 0;
-    float maxDuration = 0;
-    Vector2 direction;
 
+public class Wolf_DogAttackState : State
+{
+    Vector2 direction;
     bool wolfUnderFire;
 
-    public Wolf_IdleState(WolfController wolfController, StateMachine StateMachine) : base(StateMachine)
+    public Wolf_DogAttackState(WolfController wolfController, StateMachine StateMachine) : base(StateMachine)
     {
         this.wC = wolfController;
     }
 
     public override void EnterState()
     {
-        wC.rb.velocity = Vector2.zero;
-
-        float dirX = Random.Range(-1f, 1f);
-        float dirY = 1 - dirX;
-
-        if (dirX < 0f)
-            dirY = 1 + dirX;
-
-        direction = new Vector2(dirX, dirY);
-
-        maxDuration = Random.Range(0, wC.restartIdleCooldown);
+        
 
     }
 
     public override void FrameUpdate()
     {
-        timer += Time.deltaTime;
-
         wolfUnderFire = Physics2D.OverlapCircle(wC.transform.position, wC.dogActionRange, wC.dogLayer);
 
         wC.UnderDogFire(wolfUnderFire);
 
-        if (timer >= maxDuration)
+        if (!wolfUnderFire)
         {
             wC.StateMachine.ChangeState(wC.ChaseState);
-            return;
-        }
-
-        if (wolfUnderFire)
-        {
-            wC.StateMachine.ChangeState(wC.DogAttackState);
             return;
         }
 
@@ -58,13 +38,13 @@ public class Wolf_IdleState : State
 
     public override void PhysicsUpdate()
     {
-        wC.rb.velocity = new Vector2(direction.x * wC.wolfSpeed * 0.25f, direction.y * wC.wolfSpeed * 0.25f);
+        wC.rb.velocity = new Vector2(direction.x * wC.currentSpeed, direction.y * wC.currentSpeed);
 
     }
 
     public override void ExitState()
     {
-        timer = 0;
+
     }
 
     public override void AnimationEnter()

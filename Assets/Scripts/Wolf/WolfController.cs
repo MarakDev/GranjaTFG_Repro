@@ -9,10 +9,10 @@ public class WolfController : MonoBehaviour
     [SerializeField] public float wolfSpeed = 7.5f;
     [SerializeField] public float maxLife = 5;
 
-    [SerializeField] public float sheepAttackRange;
-    [SerializeField] public float dogAttackingRange;
+    [SerializeField] public float dogActionRange;
 
-    [SerializeField] public float restartChaseCooldown;
+    [SerializeField] public float restartIdleCooldown;
+    [SerializeField] public float restartCooldown;
 
     [SerializeField] public LayerMask sheepLayer;
     [SerializeField] public LayerMask dogLayer;
@@ -26,7 +26,6 @@ public class WolfController : MonoBehaviour
 
     [HideInInspector] public float currentSpeed;
     [HideInInspector] public float currentLife;
-
     [HideInInspector] public bool barrierWolf;
 
 
@@ -38,8 +37,9 @@ public class WolfController : MonoBehaviour
     public Wolf_ChaseState ChaseState { get; set; }
     public Wolf_AfraidState AfraidState { get; set; }
     public Wolf_RestartState RestartState { get; set; }
+    public Wolf_DogAttackState DogAttackState { get; set; }
 
-
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -58,6 +58,7 @@ public class WolfController : MonoBehaviour
         ChaseState = new Wolf_ChaseState(this, StateMachine);
         AfraidState = new Wolf_AfraidState(this, StateMachine);
         RestartState = new Wolf_RestartState(this, StateMachine);
+        DogAttackState = new Wolf_DogAttackState(this, StateMachine);
 
         //inicia al el personaje con RestartState para reiniciar al lobo y darle un margen al jugador
         StateMachine.Initialize(RestartState);
@@ -89,11 +90,56 @@ public class WolfController : MonoBehaviour
 
     }
 
+    public void UnderDogFire(bool isWolfUnderFire)
+    {
+        if (isWolfUnderFire)
+        {
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, dogActionRange, dogLayer);
+
+            if (hitColliders.Length == 2)
+            {
+                float velReduction = 1 - (currentLife * maxLife / 7.5f);
+
+                if (velReduction < 0.1)
+                    velReduction = 0.1f;
+
+                currentLife -= Time.deltaTime * 3;
+                currentSpeed = wolfSpeed * velReduction;
+
+            }
+            else if (hitColliders.Length == 1)
+            {
+                float velReduction = 1 - (currentLife * maxLife / 15);
+
+                if (velReduction < 0.25)
+                    velReduction = 0.25f;
+
+                currentLife -= Time.deltaTime;
+                currentSpeed = wolfSpeed * velReduction;
+
+            }
+
+        }
+
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("WolfDeactivate") && StateMachine.CurrentState.ToString() == "Wolf_AfraidState")
         {
             barrierWolf = true;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+
+        if(Physics2D.OverlapCircle(transform.position, dogActionRange, dogLayer))
+            Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere(transform.position, dogActionRange);
+
     }
 }

@@ -1,14 +1,10 @@
 
-
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.TextCore.Text;
-
 public class State
 {
 
     protected StateMachine stateMachine;
     protected WolfController wC;
+    protected SheepController sC;
 
     public State(StateMachine StateMachine)
     {
