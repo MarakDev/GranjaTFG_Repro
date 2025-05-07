@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3fb3862322966614294ed51a3ab0287b
+guid: 841e76c3fa3c37746b21f3c5d81fcee2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,11 +106,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: perro_Idle_shooting_0
+      name: perro_Run_Shooting_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42dba1cabaf47844fbaca8023e19014e
-      internalID: 471859007
+      spriteID: 215c458c548d7fc4e859b7508d1f365a
+      internalID: 1618312273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: perro_Idle_shooting_1
+      name: perro_Run_Shooting_1
       rect:
         serializedVersion: 2
         x: 64
@@ -145,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b775a56a42ed1db4483745210fa084c9
-      internalID: 1509339503
+      spriteID: 30efb47ad7e672d49838378ead725d59
+      internalID: -1567877499
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: perro_Idle_shooting_2
+      name: perro_Run_Shooting_2
       rect:
         serializedVersion: 2
         x: 128
@@ -166,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 001f3a9e384e4aa43a33892e92c8963a
-      internalID: -1457823843
+      spriteID: 3ebb125352ef89c41b5ce1318edeaeb0
+      internalID: 1056966887
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: perro_Idle_shooting_3
+      name: perro_Run_Shooting_3
       rect:
         serializedVersion: 2
         x: 192
@@ -187,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5becb8a26ffd1324bab7892fc91bf473
-      internalID: 1614115180
+      spriteID: 1cc41670b19f900458809c73673b2c45
+      internalID: 57567721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: perro_Idle_shooting_4
+      name: perro_Run_Shooting_4
       rect:
         serializedVersion: 2
         x: 256
@@ -208,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6825ce97dbc13d2468074056fd0a48a3
-      internalID: 874884034
+      spriteID: 6a3d5b5f86c501746a3f450b14670343
+      internalID: -839513207
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: perro_Idle_shooting_5
+      name: perro_Run_Shooting_5
       rect:
         serializedVersion: 2
         x: 320
@@ -229,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acde7f0ff4acda14090acb94c0c3c6e7
-      internalID: 769160937
+      spriteID: 767f1a938d7d6974787dbe182fbe1f1a
+      internalID: -232584462
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: perro_Idle_shooting_6
+      name: perro_Run_Shooting_6
       rect:
         serializedVersion: 2
         x: 384
@@ -250,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2ffc3296534a6045acd29c5333f1867
-      internalID: 1338927159
+      spriteID: abda0d74c8381f2469abed52021ef341
+      internalID: 1178413968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: perro_Idle_shooting_7
+      name: perro_Run_Shooting_7
       rect:
         serializedVersion: 2
         x: 448
@@ -271,8 +284,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66b9cf85af84ff448b789e84a1a0fe46
-      internalID: 1861626966
+      spriteID: 86c91876318511c42a8489297a0a9554
+      internalID: -103259202
       vertices: []
       indices: 
       edges: []
@@ -288,14 +301,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      perro_Idle_shooting_0: 471859007
-      perro_Idle_shooting_1: 1509339503
-      perro_Idle_shooting_2: -1457823843
-      perro_Idle_shooting_3: 1614115180
-      perro_Idle_shooting_4: 874884034
-      perro_Idle_shooting_5: 769160937
-      perro_Idle_shooting_6: 1338927159
-      perro_Idle_shooting_7: 1861626966
+      perro_Run_Shooting_0: 1618312273
+      perro_Run_Shooting_1: -1567877499
+      perro_Run_Shooting_2: 1056966887
+      perro_Run_Shooting_3: 57567721
+      perro_Run_Shooting_4: -839513207
+      perro_Run_Shooting_5: -232584462
+      perro_Run_Shooting_6: 1178413968
+      perro_Run_Shooting_7: -103259202
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -4843,7 +4843,6 @@ GameObject:
   - component: {fileID: 748005378769262002}
   - component: {fileID: 8280965607917989596}
   - component: {fileID: 9086698594943375665}
-  - component: {fileID: 1178342274231133618}
   - component: {fileID: 670506488295202280}
   m_Layer: 11
   m_Name: Sheep
@@ -5003,32 +5002,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1178342274231133618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8381292287887865596}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e55e8c7448f4ff4ca73f4c807d2a1d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wanderSpeed: 1
-  pastorSpeed: 7
-  afraidSpeed: 9
-  maxStress: 20
-  cooldownChangeDirection: {x: 3, y: 12}
-  cooldownStay: {x: 6, y: 12}
-  dogAreaRange: 6
-  wolfAreaRange: 9
-  dogLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  wolfLayer:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!114 &670506488295202280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5041,20 +5014,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46819c0d931ca5d40be69637e2daa248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sheepSpeed: 1.25
+  sheepSpeed: 1
   maxLife: 10
-  wolfAttackRange: 8
+  maxStomachCapacity: 20
+  maxStress: 100
   dogActionRange: 6
-  restartIdleCooldown: 4
-  restartWalkCooldown: 8
-  wolfLayer:
-    serializedVersion: 2
-    m_Bits: 512
+  wolfAttackRange: 10
+  grasssActionRange: 20
+  idleTime: 4
+  walkTime: 6
+  eatTime: 10
   dogLayer:
     serializedVersion: 2
     m_Bits: 256
+  wolfLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  grassLayer:
+    serializedVersion: 2
+    m_Bits: 262144
   rb: {fileID: 0}
   animator: {fileID: 0}
   currentSpeed: 0
-  currentLife: 0
-  barrierWolf: 0
+  currentStomachCapacity: 0
+  stomachFull: 0
+  currentStress: 0

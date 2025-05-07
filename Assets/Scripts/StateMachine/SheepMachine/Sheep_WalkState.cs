@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 
 public class Sheep_WalkState : State
@@ -7,6 +8,10 @@ public class Sheep_WalkState : State
     float maxDuration = 0;
 
     Vector2 direction;
+
+    Vector2 currentGrassPosition;
+    bool searchingGrass = false;
+
     public Sheep_WalkState(SheepController sheepController, StateMachine StateMachine) : base(StateMachine)
     {
         this.sC = sheepController;
@@ -16,40 +21,88 @@ public class Sheep_WalkState : State
     {
         sC.rb.velocity = Vector2.zero;
 
-        float dirX = Random.Range(-1f, 1f);
-        float dirY = 1 - dirX;
+        //eleccion de posicion aleatoria
+        if (sC.currentStomachCapacity < 6)
+            direction = GrassDirection();
+        else
+            direction = sC.RandomPosition();
 
-        if (dirX < 0f)
-            dirY = 1 + dirX;
-
-        direction = new Vector2(dirX, dirY);
-
-        maxDuration = Random.Range(sC.restartIdleCooldown - 5, sC.restartIdleCooldown + 5);
+        //maxima duracion en estado walk
+        maxDuration = Random.Range(sC.walkTime - 3, sC.walkTime + 3);
 
         if (maxDuration < 2)
             maxDuration = 5;
+
+        sC.currentSpeed = sC.sheepSpeed;
     }
+
 
     public override void FrameUpdate()
     {
         timer += Time.deltaTime;
 
-        if (timer >= maxDuration)
+        if (timer >= maxDuration && !searchingGrass)
         {
             sC.StateMachine.ChangeState(sC.IdleState);
+            return;
+        }
+
+        if (searchingGrass)
+        {
+            direction = CurrentGrassDirection();
+
+            //cuando la oveja esta en un rango de menos de 1 distancia
+            if(Physics2D.OverlapCircle(sC.transform.position, 1f, sC.grassLayer))
+            {
+                sC.StateMachine.ChangeState(sC.EatState);
+                return;
+            }
+        }
+
+        if (sC.DogIsNear())
+        {
+            sC.StateMachine.ChangeState(sC.ChaseDogState);
+            return;
+        }
+
+        if (sC.WolfIsNear())
+        {
+            sC.StateMachine.ChangeState(sC.ChaseWolfState);
             return;
         }
     }
 
     public override void PhysicsUpdate()
     {
-        sC.rb.velocity = new Vector2(direction.x * sC.sheepSpeed, direction.y * sC.sheepSpeed);
+        sC.rb.velocity = new Vector2(direction.x * sC.currentSpeed, direction.y * sC.currentSpeed);
 
     }
 
     public override void ExitState()
     {
         timer = 0;
+        searchingGrass = false;
+    }
+
+    private Vector2 GrassDirection()
+    {
+        Collider2D hitGrass = Physics2D.OverlapCircle(sC.transform.position, sC.grasssActionRange, sC.grassLayer);
+
+        if (hitGrass != null && !sC.stomachFull)
+        {
+            searchingGrass = true;
+
+            currentGrassPosition = hitGrass.transform.position;
+
+            return (hitGrass.transform.position - sC.transform.position).normalized;
+        }
+
+        return sC.RandomPosition();
+    }
+
+    private Vector2 CurrentGrassDirection()
+    {
+        return (currentGrassPosition - (Vector2)sC.transform.position).normalized;
     }
 
     public override void AnimationEnter()

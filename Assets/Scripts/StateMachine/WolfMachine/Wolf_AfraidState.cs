@@ -13,15 +13,11 @@ public class Wolf_AfraidState : State
     {
         wC.rb.velocity = Vector2.zero;
 
-        float dirX = Random.Range(-1f, 1f);
-        float dirY = 1 - dirX;
+        direction = wC.RandomPosition();
 
-        if (dirX < 0f)
-            dirY = 1 + dirX;
-
-        direction = new Vector2(dirX, dirY);
-        wC.currentSpeed = wC.wolfSpeed * 2;
+        wC.currentSpeed = wC.wolfSpeed * 2.5f;
     }
+
     public override void FrameUpdate()
     {
         if (wC.barrierWolf)

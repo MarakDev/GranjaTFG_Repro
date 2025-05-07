@@ -6,14 +6,20 @@ using UnityEngine;
 public class WolfController : MonoBehaviour
 {
     //parametros modificables
+    [Tooltip("Velocidad base del lobo")]
     [SerializeField] public float wolfSpeed = 7.5f;
+    [Tooltip("Vida maxima del lobo")]
     [SerializeField] public float maxLife = 5;
 
+    [Tooltip("Rango en el que puede ser atacado por el perro")]
     [SerializeField] public float dogActionRange;
 
-    [SerializeField] public float restartIdleCooldown;
-    [SerializeField] public float restartCooldown;
+    [Tooltip("Tiempo en el que esta en idle state")]
+    [SerializeField] public float idleTime = 2;
+    [Tooltip("Tiempo en el que esta en restart state")]
+    [SerializeField] public float restartTime = 6;
 
+    [Header("Layers")]
     [SerializeField] public LayerMask sheepLayer;
     [SerializeField] public LayerMask dogLayer;
 
@@ -90,7 +96,7 @@ public class WolfController : MonoBehaviour
 
     }
 
-    public void UnderDogFire(bool isWolfUnderFire)
+    public void UnderDogAttack(bool isWolfUnderFire)
     {
         if (isWolfUnderFire)
         {
@@ -119,10 +125,21 @@ public class WolfController : MonoBehaviour
 
             }
 
+            
         }
 
     }
 
+    public Vector2 RandomPosition()
+    {
+        float dirX = Random.Range(-1f, 1f);
+        float dirY = 1 - dirX;
+
+        if (dirX < 0f)
+            dirY = 1 + dirX;
+
+        return new Vector2(dirX, dirY);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

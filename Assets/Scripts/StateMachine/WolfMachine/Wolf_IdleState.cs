@@ -6,7 +6,7 @@ public class Wolf_IdleState : State
     float maxDuration = 0;
     Vector2 direction;
 
-    bool wolfUnderFire;
+    bool wolfUnderAttack;
 
     public Wolf_IdleState(WolfController wolfController, StateMachine StateMachine) : base(StateMachine)
     {
@@ -17,25 +17,20 @@ public class Wolf_IdleState : State
     {
         wC.rb.velocity = Vector2.zero;
 
-        float dirX = Random.Range(-1f, 1f);
-        float dirY = 1 - dirX;
+        direction = wC.RandomPosition();
 
-        if (dirX < 0f)
-            dirY = 1 + dirX;
+        maxDuration = Random.Range(0, wC.idleTime);
 
-        direction = new Vector2(dirX, dirY);
-
-        maxDuration = Random.Range(0, wC.restartIdleCooldown);
-
+        wC.currentSpeed = wC.wolfSpeed * 0.25f;
     }
 
     public override void FrameUpdate()
     {
         timer += Time.deltaTime;
 
-        wolfUnderFire = Physics2D.OverlapCircle(wC.transform.position, wC.dogActionRange, wC.dogLayer);
+        wolfUnderAttack = Physics2D.OverlapCircle(wC.transform.position, wC.dogActionRange, wC.dogLayer);
 
-        wC.UnderDogFire(wolfUnderFire);
+        wC.UnderDogAttack(wolfUnderAttack);
 
         if (timer >= maxDuration)
         {
@@ -43,7 +38,7 @@ public class Wolf_IdleState : State
             return;
         }
 
-        if (wolfUnderFire)
+        if (wolfUnderAttack)
         {
             wC.StateMachine.ChangeState(wC.DogAttackState);
             return;
@@ -58,7 +53,7 @@ public class Wolf_IdleState : State
 
     public override void PhysicsUpdate()
     {
-        wC.rb.velocity = new Vector2(direction.x * wC.wolfSpeed * 0.25f, direction.y * wC.wolfSpeed * 0.25f);
+        wC.rb.velocity = new Vector2(direction.x * wC.currentSpeed, direction.y * wC.currentSpeed);
 
     }
 

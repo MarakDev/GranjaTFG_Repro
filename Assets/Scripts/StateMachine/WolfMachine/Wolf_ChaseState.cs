@@ -5,7 +5,7 @@ public class Wolf_ChaseState : State
 {
     Vector2 direction;
 
-    bool wolfUnderFire;
+    bool wolfUnderAttack;
 
     public Wolf_ChaseState(WolfController wolfController, StateMachine StateMachine) : base(StateMachine)
     {
@@ -15,14 +15,14 @@ public class Wolf_ChaseState : State
     public override void EnterState()
     {
         wC.SheepSelect();
-
+        wC.currentSpeed = wC.wolfSpeed;
     }
 
     public override void FrameUpdate()
     {
-        wolfUnderFire = Physics2D.OverlapCircle(wC.transform.position, wC.dogActionRange, wC.dogLayer);
+        wolfUnderAttack = Physics2D.OverlapCircle(wC.transform.position, wC.dogActionRange, wC.dogLayer);
 
-        wC.UnderDogFire(wolfUnderFire);
+        wC.UnderDogAttack(wolfUnderAttack);
 
         SheepChaseDirection();
 
@@ -32,7 +32,7 @@ public class Wolf_ChaseState : State
             return;
         }
 
-        if (wolfUnderFire)
+        if (wolfUnderAttack)
         {
             wC.StateMachine.ChangeState(wC.DogAttackState);
             return;
@@ -68,11 +68,10 @@ public class Wolf_ChaseState : State
 
     private void SheepChaseDirection()
     {
-        if (!wolfUnderFire)
-        {
-            direction = (wC.activeSheep.transform.position - wC.transform.position).normalized;
-            wC.currentSpeed = wC.wolfSpeed;
-        }
+
+        direction = (wC.activeSheep.transform.position - wC.transform.position).normalized;
+
+
     }
 
 }

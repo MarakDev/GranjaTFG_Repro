@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0462abb06e468ab40b864671f69eee16
+guid: 23878e477144f4440bdff046e8c0351c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,11 +106,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: perro_Idle_0
+      name: perro_Run_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 062753b37f1561044860fb42387591dc
-      internalID: 1250983776
+      spriteID: 822dfad523803df4d9c0359ccb763f6b
+      internalID: -1145226593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: perro_Idle_1
+      name: perro_Run_1
       rect:
         serializedVersion: 2
         x: 64
@@ -145,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f04ce864eacf22848bbacd422027934b
-      internalID: -462087425
+      spriteID: 80a903999fffa7c4d8bd550e817496d0
+      internalID: 1223433480
       vertices: []
       indices: 
       edges: []
@@ -162,8 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      perro_Idle_0: 1250983776
-      perro_Idle_1: -462087425
+      perro_Run_0: -1145226593
+      perro_Run_1: 1223433480
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

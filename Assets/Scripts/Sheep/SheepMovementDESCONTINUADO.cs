@@ -295,19 +295,19 @@ public class SheepMovementDESCONTINUADO : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        //Gizmos.color = Color.green;
 
-        if (Physics2D.OverlapCircle(transform.position, dogAreaRange, dogLayer))
-            Gizmos.color = Color.red;
+        //if (Physics2D.OverlapCircle(transform.position, dogAreaRange, dogLayer))
+        //    Gizmos.color = Color.red;
 
-        Gizmos.DrawWireSphere(transform.position, dogAreaRange);
+        //Gizmos.DrawWireSphere(transform.position, dogAreaRange);
 
-        Gizmos.color = Color.cyan;
+        //Gizmos.color = Color.cyan;
 
-        if(Physics2D.OverlapCircle(transform.position, wolfAreaRange, wolfLayer))
-            Gizmos.color = Color.red;
+        //if(Physics2D.OverlapCircle(transform.position, wolfAreaRange, wolfLayer))
+        //    Gizmos.color = Color.red;
 
-        Gizmos.DrawWireSphere(transform.position, wolfAreaRange);
+        //Gizmos.DrawWireSphere(transform.position, wolfAreaRange);
 
     }
 }

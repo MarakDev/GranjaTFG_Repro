@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Sheep_IdleState : State
+public class Sheep_EatState : State
 {
     float timer = 0;
     float maxDuration = 0;
 
-    public Sheep_IdleState(SheepController sheepController, StateMachine StateMachine) : base(StateMachine)
+    public Sheep_EatState(SheepController sheepController, StateMachine StateMachine) : base(StateMachine)
     {
         this.sC = sheepController;
     }
@@ -14,7 +14,7 @@ public class Sheep_IdleState : State
     {
         sC.rb.velocity = Vector2.zero;
 
-        maxDuration = Random.Range(sC.idleTime - 2, sC.idleTime + 2);
+        maxDuration = Random.Range(sC.eatTime - 3, sC.eatTime + 3);
 
         if(maxDuration < 1)
             maxDuration = 3;
@@ -24,13 +24,15 @@ public class Sheep_IdleState : State
     {
         timer += Time.deltaTime;
 
+        sC.currentStomachCapacity += Time.deltaTime;
+
         if (timer >= maxDuration)
         {
             sC.StateMachine.ChangeState(sC.WalkState);
             return;
         }
 
-        if(sC.DogIsNear())
+        if (sC.DogIsNear())
         {
             sC.StateMachine.ChangeState(sC.ChaseDogState);
             return;
@@ -52,7 +54,6 @@ public class Sheep_IdleState : State
     {
         timer = 0;
     }
-
 
     public override void AnimationEnter()
     {
