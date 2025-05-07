@@ -7,8 +7,6 @@ public class Sheep_WalkState : State
     float timer = 0;
     float maxDuration = 0;
 
-    Vector2 direction;
-
     Vector2 currentGrassPosition;
     bool searchingGrass = false;
 
@@ -23,9 +21,9 @@ public class Sheep_WalkState : State
 
         //eleccion de posicion aleatoria
         if (sC.currentStomachCapacity < 6)
-            direction = GrassDirection();
+            sC.direction = GrassDirection();
         else
-            direction = sC.RandomPosition();
+            sC.direction = sC.RandomPosition();
 
         //maxima duracion en estado walk
         maxDuration = Random.Range(sC.walkTime - 3, sC.walkTime + 3);
@@ -49,7 +47,7 @@ public class Sheep_WalkState : State
 
         if (searchingGrass)
         {
-            direction = CurrentGrassDirection();
+            sC.direction = CurrentGrassDirection();
 
             //cuando la oveja esta en un rango de menos de 1 distancia
             if(Physics2D.OverlapCircle(sC.transform.position, 1f, sC.grassLayer))
@@ -70,11 +68,17 @@ public class Sheep_WalkState : State
             sC.StateMachine.ChangeState(sC.ChaseWolfState);
             return;
         }
+
+        if (sC.SheepFollowLogic())
+        {
+            sC.StateMachine.ChangeState(sC.FollowSheepState);
+            return;
+        }
     }
 
     public override void PhysicsUpdate()
     {
-        sC.rb.velocity = new Vector2(direction.x * sC.currentSpeed, direction.y * sC.currentSpeed);
+        sC.rb.velocity = new Vector2(sC.direction.x * sC.currentSpeed, sC.direction.y * sC.currentSpeed);
 
     }
 

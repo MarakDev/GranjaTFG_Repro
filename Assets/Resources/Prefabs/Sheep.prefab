@@ -5015,15 +5015,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sheepSpeed: 1
+  sheepChaseDogSpeed: 1
+  sheepChaseWolfSpeed: 1
   maxLife: 10
   maxStomachCapacity: 20
   maxStress: 100
+  sheepActionRange: 4
   dogActionRange: 6
   wolfAttackRange: 10
   grasssActionRange: 20
   idleTime: 4
   walkTime: 6
   eatTime: 10
+  sheepLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   dogLayer:
     serializedVersion: 2
     m_Bits: 256

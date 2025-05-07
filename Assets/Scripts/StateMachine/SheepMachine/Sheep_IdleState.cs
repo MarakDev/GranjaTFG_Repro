@@ -18,6 +18,8 @@ public class Sheep_IdleState : State
 
         if(maxDuration < 1)
             maxDuration = 3;
+
+        sC.direction = Vector2.zero;
     }
 
     public override void FrameUpdate()
@@ -30,7 +32,7 @@ public class Sheep_IdleState : State
             return;
         }
 
-        if(sC.DogIsNear())
+        if (sC.DogIsNear())
         {
             sC.StateMachine.ChangeState(sC.ChaseDogState);
             return;
@@ -39,6 +41,12 @@ public class Sheep_IdleState : State
         if (sC.WolfIsNear())
         {
             sC.StateMachine.ChangeState(sC.ChaseWolfState);
+            return;
+        }
+
+        if (sC.SheepFollowLogic())
+        {
+            sC.StateMachine.ChangeState(sC.FollowSheepState);
             return;
         }
     }

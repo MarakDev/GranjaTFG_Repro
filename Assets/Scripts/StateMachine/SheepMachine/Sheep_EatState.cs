@@ -43,6 +43,13 @@ public class Sheep_EatState : State
             sC.StateMachine.ChangeState(sC.ChaseWolfState);
             return;
         }
+
+        if (sC.SheepFollowLogic())
+        {
+            sC.StateMachine.ChangeState(sC.FollowSheepState);
+            return;
+        }
+
     }
 
     public override void PhysicsUpdate()

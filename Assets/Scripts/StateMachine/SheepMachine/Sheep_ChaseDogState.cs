@@ -1,11 +1,10 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Sheep_ChaseDogState : State
 {
     float timer = 0;
     float maxDuration = 0.5f;
-
-    Vector2 direction;
 
     public Sheep_ChaseDogState(SheepController sheepController, StateMachine StateMachine) : base(StateMachine)
     {
@@ -16,17 +15,15 @@ public class Sheep_ChaseDogState : State
     {
         sC.rb.velocity = Vector2.zero;
 
-        
     }
 
     public override void FrameUpdate()
     {
         UpdateDogState();
 
-
         if (timer >= maxDuration)
         {
-            sC.StateMachine.ChangeState(sC.IdleState);
+            sC.StateMachine.ChangeState(sC.WalkState);
             return;
         }
 
@@ -36,12 +33,16 @@ public class Sheep_ChaseDogState : State
             return;
         }
 
-        Debug.Log(timer);
+        if (sC.SheepFollowLogic())
+        {
+            sC.StateMachine.ChangeState(sC.FollowSheepState);
+            return;
+        }
     }
 
     public override void PhysicsUpdate()
     {
-        sC.rb.velocity = new Vector2(direction.x * sC.currentSpeed, direction.y * sC.currentSpeed);
+        sC.rb.velocity = new Vector2(sC.direction.x * sC.currentSpeed, sC.direction.y * sC.currentSpeed);
 
     }
 
@@ -59,7 +60,7 @@ public class Sheep_ChaseDogState : State
         else
         {
             timer = 0;
-            direction = UpdateDogDirection();
+            sC.direction = UpdateDogDirection();
         }
     }
 
