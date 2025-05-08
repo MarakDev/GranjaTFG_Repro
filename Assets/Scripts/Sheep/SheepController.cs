@@ -170,7 +170,6 @@ public class SheepController : MonoBehaviour
             {
                 if (sheepFollow[i].name != this.name)
                 {
-                    Debug.Log("sheepscolldier " + sheepFollow[i].name + "  - name: " + this.name);
 
                     float distBetweenSheeps = Vector2.Distance(transform.position, sheepFollow[i].transform.position);
 
@@ -223,26 +222,26 @@ public class SheepController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.magenta;
+        //Gizmos.color = Color.magenta;
 
-        if (Physics2D.OverlapCircle(transform.position, dogActionRange, dogLayer))
-            Gizmos.color = Color.red;
+        //if (Physics2D.OverlapCircle(transform.position, dogActionRange, dogLayer))
+        //    Gizmos.color = Color.red;
 
-        Gizmos.DrawWireSphere(transform.position, dogActionRange);
+        //Gizmos.DrawWireSphere(transform.position, dogActionRange);
 
-        Gizmos.color = Color.cyan;
+        //Gizmos.color = Color.cyan;
 
-        if (Physics2D.OverlapCircle(transform.position, wolfAttackRange, wolfLayer))
-            Gizmos.color = Color.red;
+        //if (Physics2D.OverlapCircle(transform.position, wolfAttackRange, wolfLayer))
+        //    Gizmos.color = Color.red;
 
-        Gizmos.DrawWireSphere(transform.position, wolfAttackRange);
+        //Gizmos.DrawWireSphere(transform.position, wolfAttackRange);
 
-        Gizmos.color = Color.green;
+        //Gizmos.color = Color.green;
 
-        if (Physics2D.OverlapCircle(transform.position, grasssActionRange, grassLayer))
-            Gizmos.color = Color.red;
+        //if (Physics2D.OverlapCircle(transform.position, grasssActionRange, grassLayer))
+        //    Gizmos.color = Color.red;
 
-        Gizmos.DrawWireSphere(transform.position, grasssActionRange);
+        //Gizmos.DrawWireSphere(transform.position, grasssActionRange);
 
         Gizmos.color = Color.green;
 

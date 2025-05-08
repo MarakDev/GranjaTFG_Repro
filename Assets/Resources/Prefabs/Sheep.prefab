@@ -5020,7 +5020,7 @@ MonoBehaviour:
   maxLife: 10
   maxStomachCapacity: 20
   maxStress: 100
-  sheepActionRange: 4
+  sheepActionRange: 6
   dogActionRange: 6
   wolfAttackRange: 10
   grasssActionRange: 20
@@ -5045,3 +5045,4 @@ MonoBehaviour:
   currentStomachCapacity: 0
   stomachFull: 0
   currentStress: 0
+  direction: {x: 0, y: 0}
