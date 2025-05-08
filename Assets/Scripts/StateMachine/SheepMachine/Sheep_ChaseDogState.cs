@@ -13,6 +13,8 @@ public class Sheep_ChaseDogState : State
 
     public override void EnterState()
     {
+        base.EnterState();
+
         sC.rb.velocity = Vector2.zero;
 
     }
@@ -38,6 +40,9 @@ public class Sheep_ChaseDogState : State
             sC.StateMachine.ChangeState(sC.FollowSheepState);
             return;
         }
+
+        sC.UpdateSpriteDirection();
+
     }
 
     public override void PhysicsUpdate()
@@ -48,6 +53,8 @@ public class Sheep_ChaseDogState : State
 
     public override void ExitState()
     {
+        base.ExitState();
+
         timer = 0;
     }
 
@@ -99,12 +106,14 @@ public class Sheep_ChaseDogState : State
 
     public override void AnimationEnter()
     {
+        sC.animator.Play("DogRun", 0, Random.Range(0f, 1f));
+        sC.transform.Find("Particle_Grass").GetComponent<ParticleSystem>().Play();
 
     }
 
     public override void AnimationExit()
     {
+        sC.transform.Find("Particle_Grass").GetComponent<ParticleSystem>().Stop();
 
     }
-
 }

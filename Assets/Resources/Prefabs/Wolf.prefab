@@ -167,8 +167,8 @@ MonoBehaviour:
   wolfSpeed: 7.5
   maxLife: 3
   dogActionRange: 5
-  restartIdleCooldown: 1
-  restartCooldown: 6
+  idleTime: 3
+  restartTime: 12
   sheepLayer:
     serializedVersion: 2
     m_Bits: 2048

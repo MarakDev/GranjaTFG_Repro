@@ -13,7 +13,7 @@ public class State
 
     public virtual void EnterState()
     {
-
+        AnimationEnter();
 
     }
     public virtual void FrameUpdate()
@@ -28,7 +28,7 @@ public class State
 
     public virtual void ExitState()
     {
-
+        AnimationExit();
     }
 
     public virtual void AnimationEnter()

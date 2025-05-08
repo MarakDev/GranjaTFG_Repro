@@ -5,6 +5,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class Sheep_WalkState : State
 {
     float timer = 0;
+    float grasstimer = 0;
     float maxDuration = 0;
 
     Vector2 currentGrassPosition;
@@ -17,6 +18,8 @@ public class Sheep_WalkState : State
 
     public override void EnterState()
     {
+        base.EnterState();
+
         sC.rb.velocity = Vector2.zero;
 
         //eleccion de posicion aleatoria
@@ -47,12 +50,19 @@ public class Sheep_WalkState : State
 
         if (searchingGrass)
         {
+            grasstimer += Time.deltaTime;
             sC.direction = CurrentGrassDirection();
 
             //cuando la oveja esta en un rango de menos de 1 distancia
             if(Physics2D.OverlapCircle(sC.transform.position, 1f, sC.grassLayer))
             {
                 sC.StateMachine.ChangeState(sC.EatState);
+                return;
+            }
+
+            if (grasstimer >= 8)
+            {
+                sC.StateMachine.ChangeState(sC.IdleState);
                 return;
             }
         }
@@ -74,6 +84,9 @@ public class Sheep_WalkState : State
             sC.StateMachine.ChangeState(sC.FollowSheepState);
             return;
         }
+
+        sC.UpdateSpriteDirection();
+
     }
 
     public override void PhysicsUpdate()
@@ -84,7 +97,10 @@ public class Sheep_WalkState : State
 
     public override void ExitState()
     {
+        base.ExitState();
+
         timer = 0;
+        grasstimer = 0;
         searchingGrass = false;
     }
 
@@ -111,6 +127,7 @@ public class Sheep_WalkState : State
 
     public override void AnimationEnter()
     {
+        sC.animator.Play("Walk", 0, Random.Range(0f, 1f));
 
     }
 

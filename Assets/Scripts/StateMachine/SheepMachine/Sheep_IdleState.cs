@@ -14,12 +14,18 @@ public class Sheep_IdleState : State
     {
         sC.rb.velocity = Vector2.zero;
 
-        maxDuration = Random.Range(sC.idleTime - 2, sC.idleTime + 2);
+        //25% de que la oveja se duerma solo afecta a la animacion
+        if(Random.Range(0, 100) < 75)
+            maxDuration = Random.Range(sC.idleTime - 2, sC.idleTime + 2);
+        else
+            maxDuration = Random.Range((sC.idleTime * 3), (sC.idleTime * 3) + 2);
 
-        if(maxDuration < 1)
+        if (maxDuration < 1)
             maxDuration = 3;
 
         sC.direction = Vector2.zero;
+
+        AnimationEnter();
     }
 
     public override void FrameUpdate()
@@ -58,18 +64,29 @@ public class Sheep_IdleState : State
 
     public override void ExitState()
     {
+        base.ExitState();
+
         timer = 0;
     }
 
 
     public override void AnimationEnter()
     {
+        if(maxDuration <= sC.idleTime * 3)
+        {
+            sC.animator.Play("Idle", 0, Random.Range(0f, 1f));
+        }
+        else
+        {
+            sC.animator.Play("SleepTransition");
 
+            sC.transform.Find("Particle_Z").GetComponent<ParticleSystem>().Play();
+        }
     }
 
     public override void AnimationExit()
     {
-
+        sC.transform.Find("Particle_Z").GetComponent<ParticleSystem>().Stop();
     }
 
 }

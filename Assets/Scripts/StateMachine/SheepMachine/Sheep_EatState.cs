@@ -12,6 +12,7 @@ public class Sheep_EatState : State
 
     public override void EnterState()
     {
+        base.EnterState();
         sC.rb.velocity = Vector2.zero;
 
         maxDuration = Random.Range(sC.eatTime - 3, sC.eatTime + 3);
@@ -59,12 +60,13 @@ public class Sheep_EatState : State
 
     public override void ExitState()
     {
+        base.ExitState();
         timer = 0;
     }
 
     public override void AnimationEnter()
     {
-
+        sC.animator.Play("EatingTransition");
     }
 
     public override void AnimationExit()

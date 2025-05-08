@@ -60,6 +60,9 @@ public class SheepController : MonoBehaviour
 
         currentStomachCapacity = Random.Range(0, maxStomachCapacity);
 
+        transform.Find("Particle_Z").GetComponent<ParticleSystem>().Stop();
+        transform.Find("Particle_Grass").GetComponent<ParticleSystem>().Stop();
+
         //Estados de la state machine
         StateMachine = new StateMachine();
 
@@ -82,8 +85,7 @@ public class SheepController : MonoBehaviour
 
         StomachCalculations();
 
-
-        Debug.Log("currentState: " + StateMachine.CurrentState.ToString());
+        //Debug.Log("currentState: " + StateMachine.CurrentState.ToString());
     }
 
 
@@ -151,6 +153,24 @@ public class SheepController : MonoBehaviour
 
     }
 
+
+    public void UpdateSpriteDirection()
+    {
+
+        if (direction.x < 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+            transform.Find("Particle_Z").transform.localPosition = new Vector3(-0.18f, transform.Find("Particle_Z").transform.localPosition.y, transform.Find("Particle_Z").transform.localPosition.z);
+            transform.Find("Particle_Grass").transform.localPosition = new Vector3(0.25f, transform.Find("Particle_Grass").transform.localPosition.y, transform.Find("Particle_Grass").transform.localPosition.z);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+            transform.Find("Particle_Z").transform.localPosition = new Vector3(0.18f, transform.Find("Particle_Z").transform.localPosition.y, transform.Find("Particle_Z").transform.localPosition.z);
+            transform.Find("Particle_Grass").transform.localPosition = new Vector3(-0.25f, transform.Find("Particle_Grass").transform.localPosition.y, transform.Find("Particle_Grass").transform.localPosition.z);
+
+        }
+    }
 
     public bool SheepFollowLogic()
     {

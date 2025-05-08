@@ -13,7 +13,6 @@ public class SheepCage : MonoBehaviour
         {
             collision.gameObject.transform.SetParent(transform, true);
             collision.gameObject.layer = LayerMask.NameToLayer("SheepIsCaged");
-            //collision.gameObject.GetComponent<SheepMovement>().GetCaged();
         }
     }
 
