@@ -133,10 +133,7 @@ public class WolfController : MonoBehaviour
     public Vector2 RandomPosition()
     {
         float dirX = Random.Range(-1f, 1f);
-        float dirY = 1 - dirX;
-
-        if (dirX < 0f)
-            dirY = 1 + dirX;
+        float dirY = Random.Range(-1f, 1f);
 
         return new Vector2(dirX, dirY);
     }

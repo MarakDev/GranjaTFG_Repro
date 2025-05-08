@@ -97,10 +97,7 @@ public class SheepController : MonoBehaviour
     public Vector2 RandomPosition()
     {
         float dirX = Random.Range(-1f, 1f);
-        float dirY = 1 - dirX;
-
-        if (dirX < 0f)
-            dirY = 1 + dirX;
+        float dirY = Random.Range(-1f, 1f);
 
         return new Vector2(dirX, dirY);
     }
@@ -125,7 +122,7 @@ public class SheepController : MonoBehaviour
         }
         else if(!stomachFull && StateMachine.CurrentState.ToString() != "Sheep_EatState")
         {
-            currentStomachCapacity -= Time.deltaTime * 0.1f;
+            currentStomachCapacity -= Time.deltaTime * 0.25f;
 
             if (currentStomachCapacity <= 0)
             {
@@ -168,7 +165,7 @@ public class SheepController : MonoBehaviour
             //con esto saco la referencia de la oveja que este mas proxima a la oveja principal
             for (int i = 0; i < sheepFollow.Length; i++)
             {
-                if (sheepFollow[i].name != this.name)
+                if (sheepFollow[i].name != this.name && sheepFollow[i].GetComponent<SheepController>().StateMachine.CurrentState.ToString() == "Sheep_ChaseDogState")
                 {
 
                     float distBetweenSheeps = Vector2.Distance(transform.position, sheepFollow[i].transform.position);
@@ -191,15 +188,15 @@ public class SheepController : MonoBehaviour
                 }
             }
 
-            if (!currentSheepFollow.IsUnityNull() && currentSheepFollow.GetComponent<SheepController>().StateMachine.CurrentState.ToString() == "Sheep_ChaseDogState")
+            if (!currentSheepFollow.IsUnityNull() /*&& currentSheepFollow.GetComponent<SheepController>().StateMachine.CurrentState.ToString() == "Sheep_ChaseDogState"*/)
             {
                 //Debug.Log("ovejaseleccionada: " + currentSheepFollow.name + "  - direction: " + direction);
 
                 Vector2 dirOtherSheep = currentSheepFollow.GetComponent<SheepController>().direction;
 
                 //Vector2 newDir = (dirBetweenTwoSheeps - dirOtherSheep).normalized;
-                //direction = (dirBetweenTwoSheeps - dirOtherSheep).normalized;
-                direction = dirOtherSheep.normalized;
+                direction = ((dirBetweenTwoSheeps / 5) + dirOtherSheep).normalized;
+                //direction = dirOtherSheep.normalized;
 
                 currentSpeed = sheepChaseDogSpeed;
 
