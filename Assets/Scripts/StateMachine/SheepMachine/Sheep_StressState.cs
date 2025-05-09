@@ -12,7 +12,6 @@ public class Sheep_StressState : State
 
     public override void EnterState()
     {
-        sC.rb.velocity = Vector2.zero;
 
         maxDuration = Random.Range(sC.idleTime - 3, sC.idleTime + 3);
 

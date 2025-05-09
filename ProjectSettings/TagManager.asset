@@ -16,7 +16,7 @@ TagManager:
   - 
   - Dog
   - Wolf
-  - WolfDeactivate
+  - 
   - Sheep
   - SheepIsCaged
   - 
@@ -29,8 +29,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - FarmBarrier
+  - WolfBarrier
   - 
   - 
   - 

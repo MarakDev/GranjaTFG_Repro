@@ -12,10 +12,9 @@ public class Sheep_IdleState : State
 
     public override void EnterState()
     {
-        sC.rb.velocity = Vector2.zero;
 
         //25% de que la oveja se duerma solo afecta a la animacion
-        if(Random.Range(0, 100) < 75)
+        if (Random.Range(0, 100) < 75)
             maxDuration = Random.Range(sC.idleTime - 2, sC.idleTime + 2);
         else
             maxDuration = Random.Range((sC.idleTime * 3), (sC.idleTime * 3) + 2);

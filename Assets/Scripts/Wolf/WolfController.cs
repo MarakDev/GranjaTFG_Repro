@@ -140,7 +140,7 @@ public class WolfController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("WolfDeactivate") && StateMachine.CurrentState.ToString() == "Wolf_AfraidState")
+        if (collision.gameObject.layer == LayerMask.NameToLayer("WolfBarrier") && StateMachine.CurrentState.ToString() == "Wolf_AfraidState")
         {
             barrierWolf = true;
         }

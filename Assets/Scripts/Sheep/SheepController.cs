@@ -28,6 +28,7 @@ public class SheepController : MonoBehaviour
     [SerializeField] public LayerMask dogLayer;
     [SerializeField] public LayerMask wolfLayer;
     [SerializeField] public LayerMask grassLayer;
+    [SerializeField] public LayerMask farmBarrierLayer;
 
     //parametros internos
     [HideInInspector] public Rigidbody2D rb;
@@ -85,7 +86,9 @@ public class SheepController : MonoBehaviour
 
         StomachCalculations();
 
-        //Debug.Log("currentState: " + StateMachine.CurrentState.ToString());
+        //Debug.Log("currentState: " + StateMachine.CurrentState.ToString() + " vel: " + rb.velocity.magnitude);
+
+        WallCheckers();
     }
 
 
@@ -111,18 +114,8 @@ public class SheepController : MonoBehaviour
             currentStomachCapacity = maxStomachCapacity;
             stomachFull = true;
         }
-
-        if (stomachFull)
-        {
-            currentStomachCapacity -= Time.deltaTime;
-
-            if (currentStomachCapacity <= 0)
-            {
-                stomachFull = false;
-                currentStomachCapacity = 0;
-            }
-        }
-        else if(!stomachFull && StateMachine.CurrentState.ToString() != "Sheep_EatState")
+        
+        if(StateMachine.CurrentState.ToString() != "Sheep_EatState")
         {
             currentStomachCapacity -= Time.deltaTime * 0.25f;
 
@@ -153,6 +146,87 @@ public class SheepController : MonoBehaviour
 
     }
 
+    public void WallCheckers()
+    {
+        Debug.DrawRay(transform.position, Vector2.up * 2f, Color.red);
+        Debug.DrawRay(transform.position, Vector2.down * 2f, Color.red);
+        Debug.DrawRay(transform.position, Vector2.right * 2f, Color.red);
+        Debug.DrawRay(transform.position, Vector2.left * 2f, Color.red);
+
+        bool upBarrier = Physics2D.Raycast(transform.position, Vector2.up, 2f, farmBarrierLayer);
+        bool downBarrier = Physics2D.Raycast(transform.position, Vector2.down, 2f, farmBarrierLayer);
+        bool rightBarrier = Physics2D.Raycast(transform.position, Vector2.right, 2f, farmBarrierLayer);
+        bool leftBarrier = Physics2D.Raycast(transform.position, Vector2.left, 2f, farmBarrierLayer);
+
+
+        //esquinas
+        if (upBarrier && leftBarrier) //arriba izquierda
+        {
+            direction = new Vector2(1, -1);
+
+            return;
+        }
+        if (upBarrier && rightBarrier) //arriba izquierda
+        {
+            direction = new Vector2(-1, -1);
+
+            return;
+        }
+        if (downBarrier && leftBarrier) //arriba izquierda
+        {
+            direction = new Vector2(1, 1);
+
+            return;
+        }
+        if (downBarrier && rightBarrier) //arriba izquierda
+        {
+            direction = new Vector2(-1, 1);
+
+            return;
+        }
+
+
+        //casos de una sola pared
+        if (upBarrier)
+        {
+            if (direction.x > 0) //mayor que 0
+                direction = new Vector2 (1, -Mathf.Abs(direction.y));
+            else  //menor que 0
+                direction = new Vector2(-1, -Mathf.Abs(direction.y));
+
+            return;
+        }
+        if (downBarrier)
+        {
+            if (direction.x > 0) //mayor que 0
+                direction = new Vector2(1, Mathf.Abs(direction.y));
+            else  //menor que 0
+                direction = new Vector2(-1, Mathf.Abs(direction.y));
+
+            return;
+        }
+        if (rightBarrier)
+        {
+            if (direction.y > 0) //mayor que 0
+                direction = new Vector2(-Mathf.Abs(direction.x), 1);
+            else  //menor que 0
+                direction = new Vector2(-Mathf.Abs(direction.x), -1);
+            
+            return;
+        }
+        if (leftBarrier)
+        {
+            if (direction.y > 0) //mayor que 0
+                direction = new Vector2(Mathf.Abs(direction.x), 1);
+            else  //menor que 0
+                direction = new Vector2(Mathf.Abs(direction.x), -1);
+
+            return;
+        }
+
+
+
+    }
 
     public void UpdateSpriteDirection()
     {
@@ -260,11 +334,11 @@ public class SheepController : MonoBehaviour
 
         //Gizmos.DrawWireSphere(transform.position, grasssActionRange);
 
-        Gizmos.color = Color.green;
+        //Gizmos.color = Color.green;
 
-        if (Physics2D.OverlapCircle(transform.position, sheepActionRange, sheepLayer))
-            Gizmos.color = Color.red;
+        //if (Physics2D.OverlapCircle(transform.position, sheepActionRange, sheepLayer))
+        //    Gizmos.color = Color.red;
 
-        Gizmos.DrawWireSphere(transform.position, sheepActionRange);
+        //Gizmos.DrawWireSphere(transform.position, sheepActionRange);
     }
 }

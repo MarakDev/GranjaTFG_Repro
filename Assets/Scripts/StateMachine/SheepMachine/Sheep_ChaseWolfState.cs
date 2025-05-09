@@ -13,7 +13,6 @@ public class Sheep_ChaseWolfState : State
     public override void EnterState()
     {
         base.EnterState();
-        sC.rb.velocity = Vector2.zero;
 
         sC.currentSpeed = sC.sheepChaseDogSpeed * 1.15f;
     }
@@ -30,12 +29,20 @@ public class Sheep_ChaseWolfState : State
 
         sC.UpdateSpriteDirection();
 
+        if (sC.rb.velocity.magnitude > sC.currentSpeed)
+        {
+            Vector2 limitVel = sC.rb.velocity.normalized * sC.currentSpeed;
+            sC.rb.velocity = new Vector2(limitVel.x, limitVel.y);
+        }
     }
 
     public override void PhysicsUpdate()
     {
-        sC.rb.velocity = new Vector2(sC.direction.x * sC.currentSpeed, sC.direction.y * sC.currentSpeed);
+        //sC.rb.velocity = new Vector2(sC.direction.x * sC.currentSpeed, sC.direction.y * sC.currentSpeed);
 
+        Vector2 vel = new Vector2(sC.direction.x * sC.currentSpeed, sC.direction.y * sC.currentSpeed);
+
+        sC.rb.AddForce(vel, ForceMode2D.Force);
     }
 
     public override void ExitState()

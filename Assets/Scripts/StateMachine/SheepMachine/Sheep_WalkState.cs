@@ -20,8 +20,6 @@ public class Sheep_WalkState : State
     {
         base.EnterState();
 
-        sC.rb.velocity = Vector2.zero;
-
         //eleccion de posicion aleatoria
         if (sC.currentStomachCapacity < 6)
             sC.direction = GrassDirection();
@@ -91,8 +89,12 @@ public class Sheep_WalkState : State
 
     public override void PhysicsUpdate()
     {
-        sC.rb.velocity = new Vector2(sC.direction.x * sC.currentSpeed, sC.direction.y * sC.currentSpeed);
+        //sC.rb.velocity = new Vector2(sC.direction.x * sC.currentSpeed, sC.direction.y * sC.currentSpeed);
 
+        Vector2 vel = new Vector2(sC.direction.x * sC.currentSpeed, sC.direction.y * sC.currentSpeed);
+
+        if (sC.rb.velocity.magnitude < sC.currentSpeed)
+            sC.rb.AddForce(vel, ForceMode2D.Force);
     }
 
     public override void ExitState()
