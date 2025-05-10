@@ -34,7 +34,7 @@ public class Wolf_DogAttackState : State
 
         if (wC.currentLife <= 0)
         {
-            wC.StateMachine.ChangeState(wC.AfraidState);
+            wC.StateMachine.ChangeState(wC.DefeatState);
             return;
         }
     }

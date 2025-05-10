@@ -231,7 +231,7 @@ public class SheepController : MonoBehaviour
     public void UpdateSpriteDirection()
     {
 
-        if (direction.x < 0)
+        if (direction.x < 0 && rb.velocity.x < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
             transform.Find("Particle_Z").transform.localPosition = new Vector3(-0.18f, transform.Find("Particle_Z").transform.localPosition.y, transform.Find("Particle_Z").transform.localPosition.z);

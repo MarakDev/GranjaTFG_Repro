@@ -46,7 +46,7 @@ public class Wolf_IdleState : State
 
         if (wC.currentLife <= 0)
         {
-            wC.StateMachine.ChangeState(wC.AfraidState);
+            wC.StateMachine.ChangeState(wC.DefeatState);
             return;
         }
     }

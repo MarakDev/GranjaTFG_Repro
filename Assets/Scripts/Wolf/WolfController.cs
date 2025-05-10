@@ -41,7 +41,7 @@ public class WolfController : MonoBehaviour
     //Movimiento
     public Wolf_IdleState IdleState { get; set; }
     public Wolf_ChaseState ChaseState { get; set; }
-    public Wolf_AfraidState AfraidState { get; set; }
+    public Wolf_DefeatState DefeatState { get; set; }
     public Wolf_RestartState RestartState { get; set; }
     public Wolf_DogAttackState DogAttackState { get; set; }
 
@@ -49,7 +49,7 @@ public class WolfController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
 
         if (sheepCollection == null)
             sheepCollection = GameObject.FindGameObjectWithTag("SheepFree");
@@ -62,7 +62,7 @@ public class WolfController : MonoBehaviour
 
         IdleState = new Wolf_IdleState(this, StateMachine);
         ChaseState = new Wolf_ChaseState(this, StateMachine);
-        AfraidState = new Wolf_AfraidState(this, StateMachine);
+        DefeatState = new Wolf_DefeatState(this, StateMachine);
         RestartState = new Wolf_RestartState(this, StateMachine);
         DogAttackState = new Wolf_DogAttackState(this, StateMachine);
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -13,10 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float wolfRange;
     [SerializeField] private LayerMask wolfLayer;
 
-    //animator
-    private Animator animatorD1;
-    private Animator animatorD2;
-
     //var privates
     private GameObject dog1;
     private GameObject dog2;
@@ -27,8 +24,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 dog1_moveDirection;
     private Vector2 dog2_moveDirection;
 
-    private bool dog1Area = false;
-    private bool dog2Area = false;
+    private float dog1_lastInput;
+    private float dog2_lastInput;
+
+    private float dog1_idleTimer;
+    private float dog2_idleTimer;
 
     //inputs
     private PlayerControls actionMap;
@@ -49,26 +49,28 @@ public class PlayerMovement : MonoBehaviour
         dog1_rb = dog1.GetComponent<Rigidbody2D>();
         dog2_rb = dog2.GetComponent<Rigidbody2D>();
 
-        animatorD1 = dog1.GetComponent<Animator>();
-        animatorD2 = dog2.GetComponent<Animator>();
+        dog1_lastInput = 1;
+        dog2_lastInput = -1;
 
-        animatorD1.Play("Idle");
-        animatorD2.Play("Idle");
+        UpdateAnimation(dog1, dog1_lastInput,ref dog1_idleTimer);
+        UpdateAnimation(dog2, dog2_lastInput, ref dog2_idleTimer);
     }
 
     private void Update()
     {
         //inputs
         dog1_moveDirection = dog1_input.ReadValue<Vector2>();
+        if (dog1_moveDirection.x != 0)
+            dog1_lastInput = dog1_moveDirection.x;
+
+        UpdateAnimation(dog1, dog1_lastInput, ref dog1_idleTimer);
+
+
         dog2_moveDirection = dog2_input.ReadValue<Vector2>();
+        if (dog2_moveDirection.x != 0)
+            dog2_lastInput = dog2_moveDirection.x;
 
-        if (dog1 != null)
-            dog1Area = Physics2D.OverlapCircle(dog1.transform.position, wolfRange, wolfLayer);
-        if (dog2 != null)
-            dog2Area = Physics2D.OverlapCircle(dog2.transform.position, wolfRange, wolfLayer);
-
-        UpdateAnimationD1();
-        UpdateAnimationD2();
+        UpdateAnimation(dog2, dog2_lastInput, ref dog2_idleTimer);
     }
 
     private void FixedUpdate()
@@ -77,51 +79,34 @@ public class PlayerMovement : MonoBehaviour
         dog2_rb.velocity = new Vector2(dog2_moveDirection.x * speed, dog2_moveDirection.y * speed);
     }
 
-    private void UpdateAnimationD1()
+    private void UpdateAnimation(GameObject dog, float inputDir, ref float idleTimer)
     {
-        if (dog1_rb.velocity.x > 0.2f)
-            dog1.transform.localScale = new Vector3(2.25f, dog1.transform.localScale.y, dog1.transform.localScale.z);
+        if (inputDir <= 0f)
+            dog.GetComponent<SpriteRenderer>().flipX = true;
         else
-            dog1.transform.localScale = new Vector3(-2.25f, dog1.transform.localScale.y, dog1.transform.localScale.z);
+            dog.GetComponent<SpriteRenderer>().flipX = false;
 
-        if (dog1_rb.velocity.magnitude < 0.2f)
+        if (dog.GetComponent<Rigidbody2D>().velocity.magnitude < 0.2f)
         {
-            if (dog1Area) //si esta en rango de lobo
-                animatorD1.Play("Idle_Shooting");
+            idleTimer += Time.deltaTime;
+
+            if (idleTimer >= 5f)
+            {
+                if (idleTimer >= 7f)
+                    idleTimer = 0;
+
+                dog.GetComponent<Animator>().Play("IdleRest");
+            }
             else
-                animatorD1.Play("Idle");
-        }else if(dog1_rb.velocity.magnitude > 0.2f)
-        {
-            if (dog1Area) //si esta en rango de lobo
-                animatorD1.Play("Run_Shooting");
-            else
-                animatorD1.Play("Run");
+                dog.GetComponent<Animator>().Play("Idle");
         }
+        else if(dog.GetComponent<Rigidbody2D>().velocity.magnitude > 0.2f)
+        {
+            idleTimer = 0;
+            dog.GetComponent<Animator>().Play("Run");
+        }
+
     }
-
-    private void UpdateAnimationD2()
-    {
-        if (dog2_rb.velocity.x > 0.2f)
-            dog2.transform.localScale = new Vector3(2.25f, dog2.transform.localScale.y, dog2.transform.localScale.z);
-        else
-            dog2.transform.localScale = new Vector3(-2.25f, dog2.transform.localScale.y, dog2.transform.localScale.z);
-
-        if (dog2_rb.velocity.magnitude < 0.2f)
-        {
-            if (dog2Area) //si esta en rango de lobo
-                animatorD2.Play("Idle_Shooting");
-            else
-                animatorD2.Play("Idle");
-        }
-        else if (dog2_rb.velocity.magnitude > 0.2f)
-        {
-            if (dog2Area) //si esta en rango de lobo
-                animatorD2.Play("Run_Shooting");
-            else
-                animatorD2.Play("Run");
-        }
-    }
-
 
     private void OnEnable()
     {

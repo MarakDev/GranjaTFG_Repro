@@ -13,12 +13,13 @@ public class Wolf_RestartState : State
 
     public override void EnterState()
     {
+        base.EnterState();
         wC.rb.velocity = Vector2.zero;
 
         wC.barrierWolf = false;
         wC.currentLife = wC.maxLife;
 
-        maxDuration = (int)Random.Range(wC.restartTime, wC.restartTime * 2);
+        maxDuration = (int)Random.Range(wC.restartTime, wC.restartTime + 5);
 
     }
 
@@ -35,5 +36,11 @@ public class Wolf_RestartState : State
     public override void ExitState()
     {
         timer = 0;
+    }
+
+    public override void AnimationEnter()
+    {
+        wC.animator.Play("Idle");
+
     }
 }

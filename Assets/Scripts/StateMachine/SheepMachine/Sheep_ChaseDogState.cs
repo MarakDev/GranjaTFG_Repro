@@ -4,7 +4,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class Sheep_ChaseDogState : State
 {
     float timer = 0;
-    float maxDuration = 0.5f;
+    float maxDuration = 0.15f;
 
     public Sheep_ChaseDogState(SheepController sheepController, StateMachine StateMachine) : base(StateMachine)
     {
