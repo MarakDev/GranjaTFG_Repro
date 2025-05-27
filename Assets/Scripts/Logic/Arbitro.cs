@@ -8,7 +8,11 @@ using UnityEngine.SceneManagement;
 public class Arbitro : MonoBehaviour
 {
     public Transform spawnArea;
+    public Transform spawnGrass;
+
+    [Header("Contenedores")]
     public Transform sheepFree;
+    public Transform grassCollection;
 
     [Header("Canvas")]
     [SerializeField] private TMP_Text __time;
@@ -30,51 +34,74 @@ public class Arbitro : MonoBehaviour
         sheep = Resources.Load<GameObject>("Prefabs/Sheep");
         wolf = Resources.Load<GameObject>("Prefabs/Wolf");
 
-        spawnAreaNumberX = (float)(spawnArea.lossyScale.x * 0.5);
-        spawnAreaNumberY = (float)(spawnArea.lossyScale.y * 0.5);
+
     }
     void Start()
     {
-        //DificultyStart();
+        DificultyStart();
         SpawnSheeps();
+        SpawnGrass();
         SpawnWolf();
     }
 
 
     private void DificultyStart()
     {
-        ////GameManager.instance.easy = true;
-        ////GameManager.instance.mid = true;
+        //GameManager.instance.easy = true;
+        //GameManager.instance.mid = true;
         //GameManager.instance.hard = true;
+        float dificulty = GameManager.instance._dificulty;
 
-        if (GameManager.instance.easy)
+        if (dificulty < 0.35f)
         {
-            n_sheeps = 30;
+            n_sheeps = 180;
             n_wolfs = 1;
-            timeRemaining = 180;
+            timeRemaining = 180 + 120;
         }
-        else if (GameManager.instance.mid)
+        else if (dificulty >= 0.35f && dificulty < 0.67f)
         {
-            n_sheeps = 60;
+            n_sheeps = 210;
             n_wolfs = 2;
             timeRemaining = 180 + 60;
         }
-        else if (GameManager.instance.hard)
+        else if (dificulty >= 0.67f)
         {
-            n_sheeps = 300;
+            n_sheeps = 250;
             n_wolfs = 3;
-            timeRemaining = 180 + 120;
+            timeRemaining = 180;
         }
     }
 
     private void SpawnSheeps()
     {
-        n_sheeps = 1000;
+        n_sheeps = 250;
+
+        spawnAreaNumberX = (float)(spawnArea.lossyScale.x * 0.5);
+        spawnAreaNumberY = (float)(spawnArea.lossyScale.y * 0.5);
+
         for (int i = 0; i < n_sheeps; i++)
         {
             Vector2 randomPos = new Vector2(Random.Range(-spawnAreaNumberX, spawnAreaNumberX) + spawnArea.transform.position.x, Random.Range(-spawnAreaNumberY, spawnAreaNumberY) + spawnArea.transform.position.y);
 
             Instantiate(sheep, randomPos, Quaternion.identity, sheepFree);
+        }
+    }
+
+    private void SpawnGrass()
+    {
+        float ngrass = 16;
+        GameObject prefabGrass = Resources.Load<GameObject>("Prefabs/Grass");
+
+        spawnAreaNumberX = (float)(spawnGrass.lossyScale.x * 0.5);
+        spawnAreaNumberY = (float)(spawnGrass.lossyScale.y * 0.5);
+
+        for (int i = 0; i < ngrass; i++)
+        {
+            Vector2 randomPos = new Vector2(Random.Range(-spawnAreaNumberX, spawnAreaNumberX) + spawnGrass.transform.position.x, Random.Range(-spawnAreaNumberY, spawnAreaNumberY) + spawnGrass.transform.position.y);
+
+            var x = Instantiate(prefabGrass, randomPos, Quaternion.identity, grassCollection);
+
+            x.layer = LayerMask.NameToLayer("Grass");
         }
     }
 
@@ -99,23 +126,7 @@ public class Arbitro : MonoBehaviour
                 randomPos = new Vector2(-52, Random.Range(-26, 65));
             }
 
-            //WolfMovement spawnedWolf = Instantiate(wolf, randomPos, Quaternion.identity).GetComponent<WolfMovement>();
-
-            //if (GameManager.instance.easy)
-            //{
-            //    spawnedWolf.wolfStartCooldown = 24f;
-            //    spawnedWolf.wolfRestartCooldown = 24;
-            //}
-            //else if (GameManager.instance.mid)
-            //{
-            //    spawnedWolf.wolfStartCooldown = 22f;
-            //    spawnedWolf.wolfRestartCooldown = 22;
-            //}
-            //else if (GameManager.instance.hard)
-            //{
-            //    spawnedWolf.wolfStartCooldown = 20f;
-            //    spawnedWolf.wolfRestartCooldown = 20;
-            //}
+            Instantiate(wolf, randomPos, Quaternion.identity);
         }
     }
 

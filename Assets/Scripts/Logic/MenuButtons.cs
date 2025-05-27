@@ -47,7 +47,6 @@ public class MenuButtons : MonoBehaviour
     {
         modo1PopUp.SetActive(false);
         dificulty.SetActive(true);
-        _eventSystem.SetSelectedGameObject(dificulty.transform.Find("easy").gameObject);
 
     }
 

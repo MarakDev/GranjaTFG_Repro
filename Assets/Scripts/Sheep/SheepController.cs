@@ -62,7 +62,7 @@ public class SheepController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        currentStomachCapacity = Random.Range(0, maxStomachCapacity);
+        currentStomachCapacity = Random.Range(0, maxStomachCapacity / 4);
 
         transform.Find("Particle_Z").GetComponent<ParticleSystem>().Stop();
         transform.Find("Particle_Grass").GetComponent<ParticleSystem>().Stop();
@@ -92,7 +92,6 @@ public class SheepController : MonoBehaviour
         //Debug.Log("currentState: " + StateMachine.CurrentState.ToString() + " vel: " + rb.velocity.magnitude);
         txt.text = "State: " + StateMachine.CurrentState.ToString() + "\nvel: " + rb.velocity.magnitude;
 
-
         WallCheckers();
     }
 
@@ -101,8 +100,6 @@ public class SheepController : MonoBehaviour
     {
         StateMachine.CurrentState.PhysicsUpdate();
     }
-
-
 
     public Vector2 RandomPosition()
     {
@@ -262,8 +259,8 @@ public class SheepController : MonoBehaviour
         Collider2D[] sheepFollow = Physics2D.OverlapCircleAll(transform.position, sheepActionRange, sheepLayer);
 
         //Debug.Log("sheepfollow number: " + sheepFollow.Length);
-        if (sheepFollow.Length > 5) //limita a 5 el numero de iteraciones
-            testOptimizacion = 5;
+        if (sheepFollow.Length > 10) //limita a 10 el numero de iteraciones
+            testOptimizacion = 10;
         else
             testOptimizacion = sheepFollow.Length;
 
@@ -308,12 +305,10 @@ public class SheepController : MonoBehaviour
 
                 //Debug.Log("dirOtherSheep: " + distClosestSheep);
 
-                if (distClosestSheep > 4)
-                    distClosestSheep = 0.25f;
+                if (distClosestSheep >= 2)
+                    distClosestSheep = 0.5f;
                 else if (distClosestSheep < 2f)
                     distClosestSheep = 1;
-                else
-                    distClosestSheep = 4 - distClosestSheep;
 
                 currentSpeed = sheepChaseDogSpeed * distClosestSheep;
 

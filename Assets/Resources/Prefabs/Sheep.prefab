@@ -5106,7 +5106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46819c0d931ca5d40be69637e2daa248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sheepSpeed: 1
+  sheepSpeed: 0.5
   sheepChaseDogSpeed: 3.75
   sheepChaseWolfSpeed: 5.75
   maxLife: 10
@@ -5167,7 +5167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1267675080556890466
 RectTransform:
   m_ObjectHideFlags: 0

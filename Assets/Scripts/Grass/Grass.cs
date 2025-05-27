@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Grass : MonoBehaviour
 {
-    [SerializeField] private float grassLife = 50;
-    [SerializeField] private float sheepActionRange = 2;
+    [SerializeField] private float grassLife = 25;
+    [SerializeField] private float sheepActionRange = 2.5f;
     [SerializeField] private LayerMask sheepLayer;
 
     bool grassDeactivated = false;
@@ -49,11 +49,12 @@ public class Grass : MonoBehaviour
         this.GetComponent<SpriteRenderer>().enabled = false;
         this.GetComponent<Collider2D>().enabled = false;
 
-        yield return new WaitForSeconds(Random.Range(8, 16));
+        yield return new WaitForSeconds(10);
 
+        grassLife = 25;
         grassDeactivated = false;
 
-        this.GetComponent<SpriteRenderer>().enabled = false;
-        this.GetComponent<Collider2D>().enabled = false;
+        this.GetComponent<SpriteRenderer>().enabled = true;
+        this.GetComponent<Collider2D>().enabled = true;
     }
 }

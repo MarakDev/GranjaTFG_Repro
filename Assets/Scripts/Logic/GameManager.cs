@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool mid;
     [HideInInspector] public bool hard;
 
+
+    [HideInInspector] public float _dificulty;
+
     [HideInInspector] public bool win;
     [HideInInspector] public float remainingTimeFinal;
 

@@ -9,8 +9,8 @@ public class Nubes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(this.transform.position.x > 115)
-            transform.position = new Vector2(-112, transform.position.y);
+        if(this.transform.position.x > 75)
+            transform.position = new Vector2(-108, transform.position.y);
 
     }
 
