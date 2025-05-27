@@ -53,7 +53,7 @@ public class MenuButtons : MonoBehaviour
 
     public void _PlayGameMode()
     {
-        SceneManager.LoadScene("ModoUTLS");
+        SceneManager.LoadScene("MainScene");
     }
 
     public void _Dificulty1PopUpEasy()

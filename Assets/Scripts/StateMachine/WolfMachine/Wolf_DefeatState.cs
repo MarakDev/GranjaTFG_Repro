@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Wolf_DefeatState : State
 {
-    Vector2 direction;
+    float timer = 0;
+    float maxDuration = 5f;
+
     public Wolf_DefeatState(WolfController wolfController, StateMachine StateMachine) : base(StateMachine)
     {
         this.wC = wolfController;
@@ -15,13 +17,17 @@ public class Wolf_DefeatState : State
 
         wC.rb.velocity = Vector2.zero;
 
+        //animacion de la sombra instanciada
+        wC.GenerateShadow();
 
-        wC.currentSpeed = wC.wolfSpeed;
+        wC.currentSpeed = 0.5f * wC.wolfSpeed;
     }
 
     public override void FrameUpdate()
     {
-        if (wC.barrierWolf)
+        timer += Time.deltaTime;
+
+        if (timer > maxDuration)
         {
             wC.StateMachine.ChangeState(wC.RestartState);
             return;
@@ -30,13 +36,15 @@ public class Wolf_DefeatState : State
 
     public override void PhysicsUpdate()
     {
-        wC.rb.velocity = new Vector2(0 * wC.currentSpeed, 1 * wC.currentSpeed);
+        wC.rb.velocity = new Vector2(0 * wC.currentSpeed,  wC.currentSpeed);
 
     }
 
     public override void ExitState()
     {
+        timer = 0;
 
+        wC.EraseShadow();
     }
 
     public override void AnimationEnter()

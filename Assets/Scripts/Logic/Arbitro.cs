@@ -30,21 +30,19 @@ public class Arbitro : MonoBehaviour
         sheep = Resources.Load<GameObject>("Prefabs/Sheep");
         wolf = Resources.Load<GameObject>("Prefabs/Wolf");
 
-        spawnAreaNumberX = (float)(spawnArea.parent.transform.lossyScale.x * spawnArea.lossyScale.x * 0.5);
-        spawnAreaNumberY = (float)(spawnArea.parent.transform.lossyScale.y * spawnArea.lossyScale.y * 0.5);
+        spawnAreaNumberX = (float)(spawnArea.lossyScale.x * 0.5);
+        spawnAreaNumberY = (float)(spawnArea.lossyScale.y * 0.5);
     }
     void Start()
     {
-        DificultyStart();
+        //DificultyStart();
         SpawnSheeps();
         SpawnWolf();
-
-
     }
+
 
     private void DificultyStart()
     {
-
         ////GameManager.instance.easy = true;
         ////GameManager.instance.mid = true;
         //GameManager.instance.hard = true;
@@ -67,26 +65,27 @@ public class Arbitro : MonoBehaviour
             n_wolfs = 3;
             timeRemaining = 180 + 120;
         }
-
-
     }
 
     private void SpawnSheeps()
     {
-        for(int i = 0; i < n_sheeps; i++)
+        n_sheeps = 1000;
+        for (int i = 0; i < n_sheeps; i++)
         {
-            Vector2 randomPos = new Vector2(Random.Range(-spawnAreaNumberX, spawnAreaNumberX), Random.Range(-spawnAreaNumberY, spawnAreaNumberY) + spawnArea.transform.position.y);
+            Vector2 randomPos = new Vector2(Random.Range(-spawnAreaNumberX, spawnAreaNumberX) + spawnArea.transform.position.x, Random.Range(-spawnAreaNumberY, spawnAreaNumberY) + spawnArea.transform.position.y);
 
             Instantiate(sheep, randomPos, Quaternion.identity, sheepFree);
         }
     }
 
+    //Vector3(-52.4000015,-34.0999985,0)
+    //Vector3(50,52.5,0)
+    //Vector3(-52.7999992,51.9000015,0)
+    //Vector3(52.4000015,-38.7000008,0)
+
     private void SpawnWolf()
     {
-        //Vector3(-52.4000015,-34.0999985,0)
-        //Vector3(50,52.5,0)
-        //Vector3(-52.7999992,51.9000015,0)
-        //Vector3(52.4000015,-38.7000008,0)
+
         for (int i = 0; i < n_wolfs; i++)
         {
             Vector2 randomPos;
@@ -122,8 +121,8 @@ public class Arbitro : MonoBehaviour
 
     private void Update()
     {
-        UpdateUI();
-        EndGame();
+        //UpdateUI();
+        //EndGame();
     }
 
     private void UpdateUI()

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Sheep_FollowSheepState : State
 {
-    float timer = 0;
-    float maxDuration = 0;
 
     public Sheep_FollowSheepState(SheepController sheepController, StateMachine StateMachine) : base(StateMachine)
     {
@@ -52,8 +50,6 @@ public class Sheep_FollowSheepState : State
     public override void ExitState()
     {
         base .ExitState();
-
-        timer = 0;
     }
 
     public override void AnimationEnter()

@@ -75,6 +75,7 @@ public class WolfController : MonoBehaviour
     {
         StateMachine.CurrentState.FrameUpdate();
 
+        UpdateSpriteDirection();
         //Debug.Log("currentState: " + StateMachine.CurrentState.ToString() + "   barrierWolf " + barrierWolf);
     }
 
@@ -129,7 +130,18 @@ public class WolfController : MonoBehaviour
         }
 
     }
+    public void UpdateSpriteDirection()
+    {
 
+        if (rb.velocity.x < 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+    }
     public Vector2 RandomPosition()
     {
         float dirX = Random.Range(-1f, 1f);
@@ -144,6 +156,19 @@ public class WolfController : MonoBehaviour
         {
             barrierWolf = true;
         }
+    }
+
+    public GameObject shadowRef;
+    public void GenerateShadow()
+    {
+        GameObject x = Resources.Load<GameObject>("Prefabs/WolfShadow");
+        shadowRef = Instantiate(x);
+        shadowRef.transform.position = transform.position;
+    }
+
+    public void EraseShadow()
+    {
+        Destroy(shadowRef);
     }
 
     private void OnDrawGizmos()

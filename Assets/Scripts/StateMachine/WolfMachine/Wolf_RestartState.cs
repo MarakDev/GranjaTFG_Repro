@@ -16,6 +16,8 @@ public class Wolf_RestartState : State
         base.EnterState();
         wC.rb.velocity = Vector2.zero;
 
+        wC.transform.position = RandomPos();
+
         wC.barrierWolf = false;
         wC.currentLife = wC.maxLife;
 
@@ -36,11 +38,25 @@ public class Wolf_RestartState : State
     public override void ExitState()
     {
         timer = 0;
+
     }
 
     public override void AnimationEnter()
     {
         wC.animator.Play("Idle");
 
+    }
+
+    private Vector2 RandomPos()
+    {
+
+        if (Random.Range(0f, 1f) >= 0.5)
+        {
+            return new Vector2(62, Random.Range(-30, 68));
+        }
+        else
+        {
+            return new Vector2(-62, Random.Range(-30, 68));
+        }
     }
 }

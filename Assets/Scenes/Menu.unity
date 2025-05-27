@@ -971,16 +971,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 528795066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cf6b600a3e564141a2acbf9f7938678, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ba8b6cd51a1f094ebf21ca7058e1954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
-  UTLS: 0
-  sheeped: 0
-  goldenSheep: 0
-  easy: 1
+  easy: 0
   mid: 0
   hard: 0
+  win: 0
+  remainingTimeFinal: 0
+  lose: 0
+  nSheepsFinal: 0
 --- !u!4 &528795068
 Transform:
   m_ObjectHideFlags: 0
@@ -1360,7 +1361,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 937530400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7847392b705cb49499ff49576680d553, type: 3}
+  m_Script: {fileID: 11500000, guid: b452e16ab0ee6294995be094181969ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pagina1: {fileID: 638152258}

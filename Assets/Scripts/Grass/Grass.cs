@@ -8,7 +8,7 @@ public class Grass : MonoBehaviour
     [SerializeField] private float sheepActionRange = 2;
     [SerializeField] private LayerMask sheepLayer;
 
-
+    bool grassDeactivated = false;
 
     void Start()
     {
@@ -18,10 +18,11 @@ public class Grass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GrassLife();
+        if(!grassDeactivated)
+            GrassLife();
 
-        if (grassLife <= 0)
-            Destroy(gameObject);
+        if (grassLife <= 0 && !grassDeactivated)
+            StartCoroutine(RespawnGrass());
     }
 
     private void GrassLife()
@@ -41,8 +42,18 @@ public class Grass : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private IEnumerator RespawnGrass()
     {
-        
+        grassDeactivated = true;
+
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        this.GetComponent<Collider2D>().enabled = false;
+
+        yield return new WaitForSeconds(Random.Range(8, 16));
+
+        grassDeactivated = false;
+
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        this.GetComponent<Collider2D>().enabled = false;
     }
 }

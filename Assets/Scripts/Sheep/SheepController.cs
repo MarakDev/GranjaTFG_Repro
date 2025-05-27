@@ -30,6 +30,9 @@ public class SheepController : MonoBehaviour
     [SerializeField] public LayerMask grassLayer;
     [SerializeField] public LayerMask farmBarrierLayer;
 
+
+    [SerializeField] public TextMesh txt;
+
     //parametros internos
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
@@ -87,6 +90,8 @@ public class SheepController : MonoBehaviour
         StomachCalculations();
 
         //Debug.Log("currentState: " + StateMachine.CurrentState.ToString() + " vel: " + rb.velocity.magnitude);
+        txt.text = "State: " + StateMachine.CurrentState.ToString() + "\nvel: " + rb.velocity.magnitude;
+
 
         WallCheckers();
     }
@@ -148,10 +153,10 @@ public class SheepController : MonoBehaviour
 
     public void WallCheckers()
     {
-        Debug.DrawRay(transform.position, Vector2.up * 2f, Color.red);
-        Debug.DrawRay(transform.position, Vector2.down * 2f, Color.red);
-        Debug.DrawRay(transform.position, Vector2.right * 2f, Color.red);
-        Debug.DrawRay(transform.position, Vector2.left * 2f, Color.red);
+        //Debug.DrawRay(transform.position, Vector2.up * 2f, Color.red);
+        //Debug.DrawRay(transform.position, Vector2.down * 2f, Color.red);
+        //Debug.DrawRay(transform.position, Vector2.right * 2f, Color.red);
+        //Debug.DrawRay(transform.position, Vector2.left * 2f, Color.red);
 
         bool upBarrier = Physics2D.Raycast(transform.position, Vector2.up, 2f, farmBarrierLayer);
         bool downBarrier = Physics2D.Raycast(transform.position, Vector2.down, 2f, farmBarrierLayer);
@@ -252,19 +257,28 @@ public class SheepController : MonoBehaviour
         GameObject currentSheepFollow = null;
         float distClosestSheep = 0;
 
+        float testOptimizacion = 1;
+
         Collider2D[] sheepFollow = Physics2D.OverlapCircleAll(transform.position, sheepActionRange, sheepLayer);
 
-        if (sheepFollow.Length > 1)
+        //Debug.Log("sheepfollow number: " + sheepFollow.Length);
+        if (sheepFollow.Length > 5) //limita a 5 el numero de iteraciones
+            testOptimizacion = 5;
+        else
+            testOptimizacion = sheepFollow.Length;
+
+        if (testOptimizacion > 1)
         {
             //con esto saco la referencia de la oveja que este mas proxima a la oveja principal
             for (int i = 0; i < sheepFollow.Length; i++)
             {
-                if (sheepFollow[i].name != this.name && sheepFollow[i].GetComponent<SheepController>().StateMachine.CurrentState.ToString() == "Sheep_ChaseDogState")
-                {
+                //Debug.Log("sheepFollow[i].name: " + sheepFollow[i].name +"   " + (sheepFollow[i].gameObject != this.gameObject));
 
+                if (sheepFollow[i].gameObject != this.gameObject && sheepFollow[i].GetComponent<SheepController>().StateMachine.CurrentState.ToString() == "Sheep_ChaseDogState")
+                {
                     float distBetweenSheeps = Vector2.Distance(transform.position, sheepFollow[i].transform.position);
 
-                    //Debug.Log("sheepFollower: " + sheepFollow[i].gameObject + "   distBetween: " + distBetweenSheeps);
+                    //Debug.Log("name= "+ name +"  sheepFollower: " + sheepFollow[i].gameObject + "   distBetween: " + distBetweenSheeps);
 
                     if (distBetweenSheeps < distClosestSheep)
                     {
@@ -292,7 +306,16 @@ public class SheepController : MonoBehaviour
                 direction = ((dirBetweenTwoSheeps / 5) + dirOtherSheep).normalized;
                 //direction = dirOtherSheep.normalized;
 
-                currentSpeed = sheepChaseDogSpeed;
+                //Debug.Log("dirOtherSheep: " + distClosestSheep);
+
+                if (distClosestSheep > 4)
+                    distClosestSheep = 0.25f;
+                else if (distClosestSheep < 2f)
+                    distClosestSheep = 1;
+                else
+                    distClosestSheep = 4 - distClosestSheep;
+
+                currentSpeed = sheepChaseDogSpeed * distClosestSheep;
 
                 return true;
             }
@@ -334,11 +357,11 @@ public class SheepController : MonoBehaviour
 
         //Gizmos.DrawWireSphere(transform.position, grasssActionRange);
 
-        //Gizmos.color = Color.green;
+        Gizmos.color = Color.green;
 
-        //if (Physics2D.OverlapCircle(transform.position, sheepActionRange, sheepLayer))
-        //    Gizmos.color = Color.red;
+        if (Physics2D.OverlapCircle(transform.position, sheepActionRange, sheepLayer))
+            Gizmos.color = Color.red;
 
-        //Gizmos.DrawWireSphere(transform.position, sheepActionRange);
+        Gizmos.DrawWireSphere(transform.position, sheepActionRange);
     }
 }
