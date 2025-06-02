@@ -132,8 +132,8 @@ public class Arbitro : MonoBehaviour
 
     private void Update()
     {
-        //UpdateUI();
-        //EndGame();
+        UpdateUI();
+        EndGame();
     }
 
     private void UpdateUI()
@@ -150,7 +150,7 @@ public class Arbitro : MonoBehaviour
         }
         if (sheepFree.childCount > 0)
         {
-            __sheepRemaining.text = string.Format("Sheep Remaining: " + sheepFree.childCount);
+            __sheepRemaining.text = string.Format("Ovejas restantes: " + sheepFree.childCount);
             GameManager.instance.remainingTimeFinal = timeRemaining;
         }
     }

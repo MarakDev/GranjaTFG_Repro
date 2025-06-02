@@ -10,11 +10,13 @@ public class EndGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(GameManager.instance.win)
-            time.text = "Remaining Time: " + GameManager.instance.remainingTimeFinal;
-
+        if (GameManager.instance.win)
+        {
+            time.text = "Tiempo Final: " + GameManager.instance.remainingTimeFinal;
+            time.text = "Ovejas que no han llegado: \n" + GameManager.instance.nSheepsFinal;
+        }
         if(GameManager.instance.lose)
-            time.text = "Sheeps that dont make it :(\n" + GameManager.instance.nSheepsFinal;
+            time.text = "Ovejas que no han llegado: \n" + GameManager.instance.nSheepsFinal;
 
     }
 

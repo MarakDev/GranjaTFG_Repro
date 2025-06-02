@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class DificultadManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class DificultadManager : MonoBehaviour
     [Header("Dificultad Calculada")]
     [Range(0f, 1f)] public float dificultad; // 0 (fácil) a 1 (difícil) esto funciona con un selector
     public GameObject slider; 
+    public TMP_Text txtDificulty; 
 
     [Header("Ajustes aplicados")]
     [HideInInspector] public float velocidadOvejasBase = 1f;
@@ -55,5 +57,23 @@ public class DificultadManager : MonoBehaviour
         GameManager.instance._dificulty = dificultad;
 
         CalcularDificultad();
+
+        if(GameManager.instance._dificulty < 0.33f)
+        {
+            txtDificulty.text = "Facil";
+            txtDificulty.color = Color.green;
+        }
+        else if(GameManager.instance._dificulty >= 0.33f && GameManager.instance._dificulty < 0.67f)
+        {
+            txtDificulty.text = "Medio";
+            txtDificulty.color = Color.yellow;
+        }
+        else if(GameManager.instance._dificulty >= 0.67f)
+        {
+            txtDificulty.text = "Dificil";
+            txtDificulty.color = Color.red;
+        }
+
+
     }
 }
