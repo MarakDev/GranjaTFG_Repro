@@ -133,9 +133,5 @@ public class Sheep_WalkState : State
 
     }
 
-    public override void AnimationExit()
-    {
-
-    }
 
 }

@@ -52,11 +52,6 @@ public class Sheep_EatState : State
 
     }
 
-    public override void PhysicsUpdate()
-    {
-
-    }
-
     public override void ExitState()
     {
         base.ExitState();
@@ -68,9 +63,5 @@ public class Sheep_EatState : State
         sC.animator.Play("EatingTransition");
     }
 
-    public override void AnimationExit()
-    {
-
-    }
 
 }

@@ -30,24 +30,10 @@ public class Sheep_StressState : State
         }
     }
 
-    public override void PhysicsUpdate()
-    {
-
-    }
 
     public override void ExitState()
     {
         timer = 0;
-    }
-
-    public override void AnimationEnter()
-    {
-
-    }
-
-    public override void AnimationExit()
-    {
-
     }
 
 }

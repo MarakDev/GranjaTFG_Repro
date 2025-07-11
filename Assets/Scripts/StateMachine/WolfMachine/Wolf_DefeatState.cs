@@ -53,9 +53,5 @@ public class Wolf_DefeatState : State
 
     }
 
-    public override void AnimationExit()
-    {
-
-    }
 
 }

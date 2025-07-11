@@ -129,24 +129,6 @@ public class SheepController : MonoBehaviour
         }
     }
 
-    private void StressCalculations()
-    {
-        //float time = Time.deltaTime * 10;
-
-        //if (wolfNear)
-        //    stress += time;
-        //else
-        //{
-        //    if (stressStun)
-        //        stress -= time;
-        //    else
-        //        stress -= time * 0.5f; //si no esta estuneado pierde el stres a la mitad de velocidad
-        //}
-
-        //if (stress < 0)
-        //    stress = 0;
-
-    }
 
     public void WallCheckers()
     {

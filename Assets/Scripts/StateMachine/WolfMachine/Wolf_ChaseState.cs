@@ -50,27 +50,10 @@ public class Wolf_ChaseState : State
         wC.rb.velocity = new Vector2(direction.x * wC.currentSpeed, direction.y * wC.currentSpeed);
 
     }
-
-    public override void ExitState()
-    {
-
-    }
-
-    public override void AnimationEnter()
-    {
-
-    }
-
-    public override void AnimationExit()
-    {
-
-    }
-
     private void SheepChaseDirection()
     {
 
         direction = (wC.activeSheep.transform.position - wC.transform.position).normalized;
-
 
     }
 

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Grass : MonoBehaviour
@@ -10,12 +9,6 @@ public class Grass : MonoBehaviour
 
     bool grassDeactivated = false;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if(!grassDeactivated)

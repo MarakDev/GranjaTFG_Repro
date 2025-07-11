@@ -38,7 +38,6 @@ public class Sheep_ChaseWolfState : State
 
     public override void PhysicsUpdate()
     {
-        //sC.rb.velocity = new Vector2(sC.direction.x * sC.currentSpeed, sC.direction.y * sC.currentSpeed);
 
         Vector2 vel = new Vector2(sC.direction.x * sC.currentSpeed, sC.direction.y * sC.currentSpeed);
 

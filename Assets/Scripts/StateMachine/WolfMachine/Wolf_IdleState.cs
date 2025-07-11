@@ -62,15 +62,4 @@ public class Wolf_IdleState : State
         timer = 0;
     }
 
-    public override void AnimationEnter()
-    {
-
-    }
-
-    public override void AnimationExit()
-    {
-
-    }
-
-
 }

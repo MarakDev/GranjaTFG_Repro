@@ -45,20 +45,4 @@ public class Wolf_DogAttackState : State
 
     }
 
-    public override void ExitState()
-    {
-
-    }
-
-    public override void AnimationEnter()
-    {
-
-    }
-
-    public override void AnimationExit()
-    {
-
-    }
-
-
 }

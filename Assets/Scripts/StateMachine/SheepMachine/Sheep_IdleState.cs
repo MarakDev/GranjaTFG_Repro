@@ -56,11 +56,6 @@ public class Sheep_IdleState : State
         }
     }
 
-    public override void PhysicsUpdate()
-    {
-
-    }
-
     public override void ExitState()
     {
         base.ExitState();

@@ -77,9 +77,4 @@ public class MenuButtons : MonoBehaviour
         modo1PopUp.SetActive(true);
     }
 
-
-    public void _Back()
-    {
-
-    }
 }
