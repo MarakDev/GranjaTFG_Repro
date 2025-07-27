@@ -3,7 +3,7 @@ This video game was created as my final project for the Video Game Development d
 
 Presents a farm where you controll two dogs that their mision is to keep the sheeps alive and storage them in the farm while defends from attacks of the wolves. The sheeps features an algoritms of boids that when they flee, they do as a group.
 
-## How was made
+## How it was made
 This game was made entirely by me in 2 months, where i coded all the behaivours and logic of the game. Then to i do the sprites of the characters and the animations.
 
 ## What I implemented
